@@ -31,7 +31,7 @@
 
 <nav class="w-screen h-10 flex items-center justify-between border-b-[1px] border-text mb-2 px-[12%]">
     <section use:melt={$menubar} class="w-full flex gap-8 items-center">
-        <a href="/" class="mr-2"><b>Mateusz Gotuje</b></a>
+        <a href="/" class="mr-2"><b>Gotuje</b></a>
         <a
           type="button"
           use:melt={$trigger}

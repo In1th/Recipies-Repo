@@ -5,3 +5,15 @@
 body {
     @apply bg-background p-0;
 }
+
+.markdown {
+    @apply flex flex-col gap-2;
+
+    & h2 {
+        @apply text-xl;
+    }
+
+    & li {
+        @apply list-disc ml-8;
+    }
+}

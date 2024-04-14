@@ -1,0 +1,17 @@
+spring:
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://localhost:5432/recipes
+    url: jdbc:postgresql://172.17.0.2:5432/recipes
+    username: postgres
+    password: root
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true

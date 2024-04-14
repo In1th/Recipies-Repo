@@ -3,5 +3,21 @@
 @tailwind utilities;
 
 body {
-    @apply bg-background p-0;
+    @apply bg-background p-0 overflow-x-hidden;
+}
+
+h1 {
+    @apply p-0 text-4xl;
+}
+
+.markdown {
+    @apply flex flex-col gap-2 text-justify;
+
+    & h2 {
+        @apply text-3xl;
+    }
+
+    & li {
+        @apply list-disc ml-8;
+    }
 }

@@ -73,6 +73,10 @@
         $tags = [];
         showTags = false;
     }
+
+    $: searchUrl = `/recipes${($tags.length > 0) ?
+        `?tags=${$tags.map(tg => tg.value).join(',')}`
+        : ''}`;
 </script>
 
 
@@ -85,23 +89,31 @@
     use:clickOutside
     on:click_outside={onFocusOut}
     >
-    <input
-        use:melt={$input}
-        bind:value={searchText}
-        on:click={onFocusIn}
-        type="text"
-        placeholder="Enter tags..."
-        class="w-full shrink grow basis-0 border-0 rounded-md p-0.5 outline-none focus:!ring-0 data-[invalid]:text-red-500"
-    />
-    {#if $tags.length > 0}
-        <button
-            class="absolute right-0"
-            on:click={clear}
-        >
-            <X/>
-        </button>
-    {/if}
-    <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md px-3 py-2">
+        <section class="flex gap-1">
+            <input
+                use:melt={$input}
+                bind:value={searchText}
+                on:click={onFocusIn}
+                type="text"
+                placeholder="Enter tags..."
+                class="w-full shrink grow basis-0 border-0 rounded-md p-0.5 outline-none focus:!ring-0 data-[invalid]:text-red-500"
+            />
+            <a
+                href={searchUrl}
+                class="flex p-1 bg-primary rounded-3xl items-center px-1"
+            >
+                <Search />
+            </a>
+            <!-- {#if $tags.length > 0}
+                <button
+                    class="absolute right-6"
+                    on:click={clear}
+                >
+                    <X/>
+                </button>
+            {/if} -->
+        </section>
+    <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md py-2">
         {#each $tags as t}
             <div
                 use:melt={$tag(t)}
@@ -150,11 +162,6 @@
         </div>
     {/if}
 </div>
-
-<!-- <button class="flex gap-1 bg-white rounded-3xl items-center px-1">
-    <Search />
-    <span>Search</span>
-</button> -->
 
 <style>
     .blue {

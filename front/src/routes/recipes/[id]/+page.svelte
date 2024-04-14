@@ -53,9 +53,9 @@
   });
 </script>
 
-<h1 class="pb-3">{data.meta.title}</h1>
+<h1 class="pt-10 font-bold">{data.meta.title}</h1>
 <section class="flex flex-col gap-1 pb-3">
-  <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
+  <p class="py-0.5 pb-3 rounded-xl w-fit">{category}</p>
   <div class="flex gap-1">
     <Tag/>
     {#each data.meta.tags.slice(0, 3) as tag}
@@ -93,8 +93,7 @@
 </section>
 
 <section class="flex flex-col gap-1 p-4 bg-secondary w-fit rounded-xl shadow-xl my-4">
-	<h3 class="font-bold">Ingredients</h3>
-	<div class="w-full h-[1px] bg-text" use:melt={$horizontal}/>
+	<h3 class="font-bold mb-2">Ingredients</h3>
 	{#each data.meta.ingredients as ingredient}
 		<Ingredient description={ingredient}/>
 	{/each}

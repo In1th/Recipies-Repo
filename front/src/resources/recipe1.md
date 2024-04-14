@@ -5,6 +5,7 @@ tags:
     - soup
     - mushroom
     - asian
+    - test
 ingredients:
     - Quarter pound of good pork belly.
     - Half a cup dried shiitake mushrooms.
@@ -19,7 +20,7 @@ ingredients:
     - Cornstarch slurry (half cup water half cup cornstarch).
     - Pinch of fried garlic.
     - 1 scallion.
-    
+time: 2h
 ---
 
 ## Soup Base:

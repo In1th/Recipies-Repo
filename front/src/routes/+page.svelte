@@ -1,3 +1,4 @@
-
-<h1 class=" bg-secondary">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<section class="flex flex-col text-center">
+    <h1>Welcome to the Recipes.</h1>
+    <p>This is not Ania gotuje I promise</p>
+</section>

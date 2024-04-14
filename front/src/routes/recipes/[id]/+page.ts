@@ -3,11 +3,11 @@ import { error } from '@sveltejs/kit';
 export const load = async ({ params }) => {
   try{
     const project = await import(`../../../resources/${params.id}.md`);
-    console.log({
-        content: project.default,
-        meta: project.metadata,
-        id: params.id
-    })
+    // console.log({
+    //     content: project.default,
+    //     meta: project.metadata,
+    //     id: params.id
+    // })
     return {
         content: project.default,
         meta: project.metadata,

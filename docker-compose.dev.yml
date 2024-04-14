@@ -1,0 +1,26 @@
+version: '3.8'
+
+name: recipes_dev
+services:
+  front:
+    container_name: frontend
+    restart: always
+    build:
+      context: ./front
+      dockerfile: Dockerfile.dev
+      no_cache: true
+    ports:
+      - 3000:3000
+      - 3010:3010
+    volumes:
+      - ./front:/usr/src/front
+      - /usr/src/front/node_modules
+  # backend:
+  #   container_name: backend
+  #   restart: always
+  #   build: 
+  #     context: ./backend
+  #     dockerfile: Dockerfile.dev
+  #     no_cache: true
+  #   ports:
+  #     - 8080:8080

@@ -37,12 +37,7 @@ public class Recipe{
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<Tag> tags;
 
-	private int calories;
-	private float protein;
-	private float carbs;
-	private float fats;
 	private String mdFilePath;
 	private String imagePath;
-	private String preparationTime;
 	private float rate;
 }

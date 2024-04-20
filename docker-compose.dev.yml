@@ -2,25 +2,50 @@ version: '3.8'
 
 name: recipes_dev
 services:
-  front:
-    container_name: frontend
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_container
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: recipes
     restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api_backend:
+    image: recipes:v0
+    container_name: recipes_container_v0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:root@postgres/recipes
+    restart: always
+
+  frontend:
     build:
       context: ./front
       dockerfile: Dockerfile.dev
       no_cache: true
+    image: recipes-front:v0
+    container_name: frontend
     ports:
       - 3000:3000
       - 3010:3010
+    depends_on:
+      - api_backend
+    restart: always
     volumes:
       - ./front:/usr/src/front
       - /usr/src/front/node_modules
-  # backend:
-  #   container_name: backend
-  #   restart: always
-  #   build: 
-  #     context: ./backend
-  #     dockerfile: Dockerfile.dev
-  #     no_cache: true
-  #   ports:
-  #     - 8080:8080
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: C:/postgres-docker-data
+

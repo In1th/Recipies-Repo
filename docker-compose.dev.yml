@@ -25,12 +25,12 @@ services:
     restart: always
 
   frontend:
+    container_name: frontend_dev
     build:
       context: ./front
       dockerfile: Dockerfile.dev
       no_cache: true
     image: recipes-front:v0
-    container_name: frontend
     ports:
       - 3000:3000
       - 3010:3010

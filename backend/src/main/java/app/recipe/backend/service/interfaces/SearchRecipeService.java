@@ -1,4 +1,4 @@
-package app.recipe.backend.service;
+package app.recipe.backend.service.interfaces;
 
 import java.util.List;
 

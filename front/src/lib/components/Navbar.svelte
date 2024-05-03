@@ -31,11 +31,13 @@
           separator: sepBurger
         },
     } = createMenu();
+
+    // const url = window.location.href.includes('/p2/') ? '/p2' : '/';
 </script>
 
-<nav class="w-screen h-10 flex items-center justify-between border-b-[1px] border-text mb-2 px-2">
+<nav class="w-screen h-10 flex items-center justify-between border-b-[1px] border-text mb-2 p-2">
     <section use:melt={$menubar} class="w-full flex gap-2 md:gap-8 items-center">
-        <a href="./" class="flex">
+        <a href='/' class="flex">
             <ChefHat />
             <b class=" hidden sm:block">Gotuje</b>
         </a>

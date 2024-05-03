@@ -53,51 +53,58 @@
   });
 </script>
 
-<h1 class="pb-3">{data.meta.title}</h1>
-<section class="flex flex-col gap-1 pb-3">
-  <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
-  <div class="flex gap-1">
-    <Tag/>
-    {#each data.meta.tags.slice(0, 3) as tag}
-      <p class="py-0.5 px-2 bg-accent rounded-xl">{tag}</p>
-    {/each}
-    {#if data.meta.tags.slice(3).length > 0}
-    <p
-      class="py-0.5 px-2 bg-accent rounded-xl"
-      use:melt={$trigger}
-    >
-      + {data.meta.tags.slice(3).length} more
-    </p>
-    {#if $open}
-      <div
-        use:melt={$content}
-        transition:fade={{ duration: 100 }}
-        class="z-10 rounded-lg bg-secondary shadow px-4 py-1"
-      >
-        <div use:melt={$arrow} />
-        {#each data.meta.tags.slice(3) as tag}
-          <li>{tag}</li>
-        {/each}
-      </div>
-      {/if}
-    {/if}
-  </div>
-  <section class="flex gap-1">
-    <Clock/>
-    {data.meta.time ?? '-'}
-  </section>
-  <section class="flex gap-1">
-    <Flame/>
-    {data.meta.calories ?? '-'}
-  </section>
+<section class="flex-1 flex items-center mb-4">
+  <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl"/>
 </section>
-
-<section class="flex flex-col gap-1 p-4 bg-secondary w-fit rounded-xl shadow-xl my-4">
-	<h3 class="font-bold">Ingredients</h3>
-	<div class="w-full h-[1px] bg-text" use:melt={$horizontal}/>
-	{#each data.meta.ingredients as ingredient}
-		<Ingredient description={ingredient}/>
-	{/each}
+<section class="xl:ml-auto flex-col">
+  <h1 class="pb-3">{data.meta.title}</h1>
+  <section class="flex flex-col gap-1 pb-3">
+    <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
+    <div class="flex gap-1">
+      <Tag/>
+      {#each data.meta.tags.slice(0, 3) as tag}
+        <p class="py-0.5 px-2 bg-accent rounded-xl">{tag}</p>
+      {/each}
+      {#if data.meta.tags.slice(3).length > 0}
+      <p
+        class="py-0.5 px-2 bg-accent rounded-xl"
+        use:melt={$trigger}
+      >
+        + {data.meta.tags.slice(3).length} more
+      </p>
+      {#if $open}
+        <div
+          use:melt={$content}
+          transition:fade={{ duration: 100 }}
+          class="z-10 rounded-lg bg-secondary shadow px-4 py-1"
+        >
+          <div use:melt={$arrow} />
+          {#each data.meta.tags.slice(3) as tag}
+            <li>{tag}</li>
+          {/each}
+        </div>
+        {/if}
+      {/if}
+    </div>
+    <section class="flex gap-1">
+      <Clock/>
+      {data.meta.time ?? '-'}
+    </section>
+    <section class="flex gap-1">
+      <Flame/>
+      {data.meta.calories ?? '-'}
+    </section>
+  </section>
+  
+  <section class="flex flex-col w-full gap-1 p-4 bg-secondary rounded-xl shadow-xl my-4">
+    <h3 class="font-bold">Ingredients</h3>
+    <div class="w-full h-[1px] bg-text" use:melt={$horizontal}/>
+    <div class="flex flex-col flex-wrap gap-1 xl:max-h-[500px] overflow-x-scroll">
+      {#each data.meta.ingredients as ingredient}
+        <Ingredient description={ingredient}/>
+      {/each}
+    </div>
+  </section>
 </section>
 
 <!-- <section class="py-4">

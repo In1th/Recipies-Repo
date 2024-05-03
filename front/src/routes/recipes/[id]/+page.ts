@@ -1,6 +1,6 @@
-import { error } from '@sveltejs/kit';
+import { error, type Load } from '@sveltejs/kit';
 
-export const load = async ({ params }) => {
+export const load: Load = async ({ params }) => {
   try{
     const project = await import(`../../../resources/${params.id}.md`);
     // console.log({

@@ -29,7 +29,7 @@
 
 <style>
     div {
-        @apply flex gap-1 text-sm;
+        @apply flex gap-1 text-sm w-fit;
     }
 
     .crossed { 

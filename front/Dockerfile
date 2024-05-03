@@ -20,4 +20,4 @@ RUN npm run build
 
 EXPOSE 80
 
-CMD [ "npm", "run", "preview" ]
+ENTRYPOINT [ "npm", "run", "preview" ]

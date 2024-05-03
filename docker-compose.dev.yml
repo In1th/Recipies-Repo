@@ -14,8 +14,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   api_backend:
-    image: recipes:v0
-    container_name: recipes_container_v0
+    # image: recipes:v0
+    container_name: recipes_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+      no_cache: true
     ports:
       - "8080:8080"
     depends_on:
@@ -30,7 +34,7 @@ services:
       context: ./front
       dockerfile: Dockerfile.dev
       no_cache: true
-    image: recipes-front:v0
+    # image: recipes-front:v0
     ports:
       - 3000:3000
       - 3010:3010
@@ -47,5 +51,5 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: C:/postgres-docker-data
+      device: ./postgres-docker-data
 

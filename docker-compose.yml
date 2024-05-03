@@ -4,6 +4,7 @@ name: recipes
 services:
   front:
     container_name: frontend
+    image: inith/recipe-app:${REV_TAG}
     restart: always
     build:
       context: ./front
@@ -11,12 +12,3 @@ services:
       no_cache: true
     ports:
       - 80:80
-  # backend:
-  #   container_name: backend
-  #   restart: always
-  #   build: 
-  #     context: ./backend
-  #     dockerfile: Dockerfile.dev
-  #     no_cache: true
-  #   ports:
-  #     - 8080:8080

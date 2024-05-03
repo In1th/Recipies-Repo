@@ -4,3 +4,11 @@ all: install
 install:
 	cd front
 	npm ci
+
+deploy:
+	REV_TAG=$(git log -1 --pretty=format:%h)
+	export REV_TAG=$REV_TAG && docker compose build
+	docker tag recipes-backend:$REV_TAG inith/recipe-backend
+	docker tag recipes-front:$REV_TAG inith/recipe-app
+	docker push inith/recipe-app
+	docker push inith/recipe-backend

@@ -1,0 +1,14 @@
+version: '3.8'
+
+name: recipes
+services:
+  front:
+    container_name: frontend
+    image: inith/recipe-app:${REV_TAG}
+    restart: always
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      no_cache: true
+    ports:
+      - 80:80

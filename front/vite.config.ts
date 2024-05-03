@@ -13,6 +13,9 @@ export default defineConfig({
 			usePolling: true
 		}
 	},
+	preview: {
+		port: 80
+	},
 	plugins: [sveltekit()],
 });
 

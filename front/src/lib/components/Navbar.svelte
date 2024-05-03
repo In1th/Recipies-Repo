@@ -31,11 +31,13 @@
           separator: sepBurger
         },
     } = createMenu();
+
+    // const url = window.location.href.includes('/p2/') ? '/p2' : '/';
 </script>
 
-<nav class="w-screen h-10 flex items-center justify-between border-b-[1px] border-text mb-2 px-2">
+<nav class="w-screen h-10 flex items-center justify-between border-b-[1px] border-text mb-2 p-2">
     <section use:melt={$menubar} class="w-full flex gap-2 md:gap-8 items-center">
-        <a href="/" class="flex">
+        <a href='/' class="flex">
             <ChefHat />
             <b class=" hidden sm:block">Gotuje</b>
         </a>
@@ -48,15 +50,15 @@
           Recipes
         </button>
         <div use:melt={$menuRecipe} class="bg-background flex flex-col gap-0.5 p-2 rounded-md shadow-xl">
-            <a href="/recipes">All</a>
+            <a href="./recipes">All</a>
             <div class="w-full h-[1px] bg-text" use:melt={$sepRecipe}/>
-            <a href="/recipes?cat=soups">Soups</a>
-            <a href="/recipes?cat=main">Main dishes</a>
-            <a href="/recipes?cat=desserts">Desserts</a>
+            <a href="./recipes?cat=soups">Soups</a>
+            <a href="./recipes?cat=main">Main dishes</a>
+            <a href="./recipes?cat=desserts">Desserts</a>
         </div>
 
         <div use:melt={$vertical} class="desktop h-4 w-[1px] bg-text"/>
-        <a class="desktop" href="/admin">Dashboard</a>
+        <a class="desktop" href="./admin">Dashboard</a>
         <button class="hidden ml-auto md:flex gap-0.5 items-center">
             <img src={google} alt="google logo"/>
             <span>Sign with Google</span>

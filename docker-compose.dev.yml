@@ -9,8 +9,8 @@ services:
       POSTGRES_DB: recipes
     ports:
       - 5432:5432
-    # volumes:
-    #   - ${PROJECT_PATH}:/var/lib/postgresql/data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     restart: always
 
   api_backend:
@@ -30,25 +30,25 @@ services:
       - postgres
     restart: always
 
-  # frontend:
-  #   build:
-  #     context: ./front
-  #     dockerfile: Dockerfile.dev
-  #     no_cache: true
-  #   image: recipes-front:v0
-  #   container_name: frontend
-  #   ports:
-  #     - 3000:3000
-  #     - 3010:3010
-  #   depends_on:
-  #     - api_backend
-  #   restart: always
-  #   volumes:
-  #     - ./front:/usr/src/front
-  #     - /usr/src/front/node_modules
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.dev
+      no_cache: true
+    image: recipes-front:v0
+    container_name: frontend
+    ports:
+      - 3000:3000
+      - 3010:3010
+    depends_on:
+      - api_backend
+    restart: always
+    volumes:
+      - ./front:/usr/src/front
+      - /usr/src/front/node_modules
 
-# volumes:
-#   ${PROJECT_PATH}:
+volumes:
+  postgres_data:
     # driver: local
     # driver_opts:
     #   type: none

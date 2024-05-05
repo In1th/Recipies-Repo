@@ -11,7 +11,7 @@ WORKDIR /usr/src/front
 # Copy over `package.json` and lock files to optimize the build process
 COPY ["package.json", "package-lock.json*", "./"]
 # Install Node modules
-RUN npm ci
+RUN npm install
 
 # Copy over rest of the project files
 COPY . .

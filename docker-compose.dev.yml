@@ -14,12 +14,11 @@ services:
     restart: always
 
   api_backend:
+    container_name: recipes_backend
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       no_cache: true
-    image: recipes-backend:v0
-    container_name: backend
     ports:
       - 8080:8080
     environment:
@@ -31,12 +30,12 @@ services:
     restart: always
 
   frontend:
+    container_name: frontend_dev
     build:
       context: ./front
       dockerfile: Dockerfile.dev
       no_cache: true
-    image: recipes-front:v0
-    container_name: frontend
+    # image: recipes-front:v0
     ports:
       - 3000:3000
       - 3010:3010
@@ -49,9 +48,8 @@ services:
 
 volumes:
   postgres_data:
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   o: bind
-    #   device: ./backend/db
-
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./postgres-docker-data

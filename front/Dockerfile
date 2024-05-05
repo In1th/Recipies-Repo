@@ -1,6 +1,5 @@
-
 # Our Node base image
-FROM node:20-alpine
+FROM --platform=linux/amd64 node:20-alpine
 
 # Set the Node environment to development to ensure all packages are installed
 ENV NODE_ENV development
@@ -11,11 +10,14 @@ WORKDIR /usr/src/front
 # Copy over `package.json` and lock files to optimize the build process
 COPY ["package.json", "package-lock.json*", "./"]
 # Install Node modules
-RUN npm install
+RUN npm ci
 
 # Copy over rest of the project files
 COPY . .
 
-EXPOSE 3000 3010
+# Builds solution
+RUN npm run build
 
-ENTRYPOINT [ "npm", "run", "dev"]
+EXPOSE 80
+
+ENTRYPOINT [ "npm", "run", "preview" ]

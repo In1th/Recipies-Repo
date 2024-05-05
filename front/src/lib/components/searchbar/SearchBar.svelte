@@ -101,7 +101,7 @@
             <X/>
         </button>
     {/if}
-    <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md px-3 py-2">
+    <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md md:px-3 py-2">
         {#each $tags as t}
             <div
                 use:melt={$tag(t)}

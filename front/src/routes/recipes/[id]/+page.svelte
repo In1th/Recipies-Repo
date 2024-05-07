@@ -63,7 +63,7 @@
     <div class="flex gap-1">
       <Tag/>
       {#each data.meta.tags.slice(0, 3) as tag}
-        <p class="py-0.5 px-2 bg-accent rounded-xl">{tag}</p>
+        <p class="py-0.5 px-2 bg-accent rounded-xl">{tag.name}</p>
       {/each}
       {#if data.meta.tags.slice(3).length > 0}
       <p
@@ -80,7 +80,7 @@
         >
           <div use:melt={$arrow} />
           {#each data.meta.tags.slice(3) as tag}
-            <li>{tag}</li>
+            <li>{tag.name}</li>
           {/each}
         </div>
         {/if}
@@ -88,7 +88,7 @@
     </div>
     <section class="flex gap-1">
       <Clock/>
-      {data.meta.time ?? '-'}
+      {data.meta.preparationTime ?? '-'}
     </section>
     <section class="flex gap-1">
       <Flame/>
@@ -100,8 +100,8 @@
     <h3 class="font-bold">Ingredients</h3>
     <div class="w-full h-[1px] bg-text" use:melt={$horizontal}/>
     <div class="flex flex-col flex-wrap gap-1 xl:max-h-[500px] overflow-x-scroll">
-      {#each data.meta.ingredients as ingredient}
-        <Ingredient description={ingredient}/>
+      {#each data.meta.recipeIngredients as ingredient}
+        <Ingredient description={ingredient.ingredient.name}/>
       {/each}
     </div>
   </section>

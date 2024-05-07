@@ -1,16 +1,26 @@
 import { error, type Load } from '@sveltejs/kit';
+import {compile} from 'mdsvex';
 
-export const load: Load = async ({ params }) => {
+export const load: Load = async ({ params, fetch }) => {
   try{
-    const project = await import(`../../../resources/${params.id}.md`);
+    const res = await fetch(`/blob/recipe/${params.id}`);
+    const recipe = await compile((await res.json()).recipe, {
+      extensions: ['.md']
+    });    
     // console.log({
     //     content: project.default,
     //     meta: project.metadata,
     //     id: params.id
     // })
     return {
-        content: project.default,
-        meta: project.metadata,
+        content: recipe,
+        meta: {
+          time: '1h',
+          calories: 23,
+          title: 'a',
+          tags: ['a', 'b', 'c'],
+          ingredients: ['a', 'b', 'c']
+        },
         id: params.id
     }
   }

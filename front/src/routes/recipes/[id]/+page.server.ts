@@ -5,16 +5,10 @@ export const load: Load = async ({ params, fetch }) => {
     const res = await fetch(`/blob/recipe/${params.id}`);  
     
     const { page, metadata } = await res.json();
-
+    console.log(metadata)
     return {
         content: page,
-        meta: {
-          time: '1h',
-          calories: 23,
-          title: 'a',
-          tags: ['a', 'b', 'c'],
-          ingredients: ['a', 'b', 'c']
-        },
+        meta: metadata,
         id: params.id
     }
   }

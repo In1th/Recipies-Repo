@@ -7,8 +7,6 @@ export default defineConfig({
 		host: true,
 		strictPort: true,
 		hmr: {
-			protocol: 'ws',
-            host: 'localhost',
 			port: 3010
 		},
 		watch: {

@@ -14,14 +14,6 @@
         elements: { menubar },
         builders: { createMenu },
     } = createMenubar();
-
-    const {
-        elements: {
-          trigger: triggerRecipe,
-          menu: menuRecipe,
-          separator: sepRecipe
-        },
-    } = createMenu();
     
     const {
         elements: {
@@ -42,22 +34,15 @@
         </a>
 
         <!-- RECIPES -->
-        <button
-          type="button"
-          use:melt={$triggerRecipe}
-        >
+        <a href="/recipes">
           Recipes
-        </button>
-        <div use:melt={$menuRecipe} class="bg-background flex flex-col gap-0.5 p-2 rounded-md shadow-xl">
-            <a href="./recipes">All</a>
-            <div class="w-full h-[1px] bg-text" use:melt={$sepRecipe}/>
-            <a href="./recipes?cat=soups">Soups</a>
-            <a href="./recipes?cat=main">Main dishes</a>
-            <a href="./recipes?cat=desserts">Desserts</a>
-        </div>
+        </a>
+        <a href="/recipes?cat=soups">Soups</a>
+        <a href="/recipes?cat=main">Main dishes</a>
+        <a href="/recipes?cat=desserts">Desserts</a>
 
         <div use:melt={$vertical} class="desktop h-4 w-[1px] bg-text"/>
-        <a class="desktop" href="./admin">Dashboard</a>
+        <a class="desktop" href="/admin">Dashboard</a>
         <script src="https://accounts.google.com/gsi/client" async></script>
         <div class="ml-auto">
             <div id="g_id_onload"

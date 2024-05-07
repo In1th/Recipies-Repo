@@ -7,6 +7,8 @@ export default defineConfig({
 		host: true,
 		strictPort: true,
 		hmr: {
+			protocol: 'ws',
+            host: 'localhost',
 			port: 3010
 		},
 		watch: {
@@ -17,5 +19,16 @@ export default defineConfig({
 		port: 80
 	},
 	plugins: [sveltekit()],
+	optimizeDeps: {
+		exclude: ['fs', 'node:fs']
+	},
+	resolve: {
+		alias: [
+			{
+        	  find: 'fs',
+        	  replacement: 'memfs',
+        	},
+		]
+	}
 });
 

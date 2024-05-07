@@ -26,7 +26,6 @@
 		"eslint": "^8.57.0",
 		"eslint-plugin-svelte": "^2.35.1",
 		"lucide-svelte": "^0.356.0",
-		"mdsvex": "^0.11.0",
 		"mocha": "^10.3.0",
 		"postcss-nesting": "^12.1.1",
 		"showdown": "^2.1.0",
@@ -40,7 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"fs": "^0.0.1-security",
+		"memfs": "^4.9.2",
 		"svelte-preprocess": "^5.1.3"
 	}
 }

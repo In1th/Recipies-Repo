@@ -1,17 +1,3 @@
----
-title: Palak Chicken
-tags:
-    - indian
-    - chicken
-    - curry
-    - spinach
-ingredients:
-    - chicken
-    - black pepper
-    - other stuff
-time: 50min
----
-
 ## Ingredients
 
 ### To Marinate

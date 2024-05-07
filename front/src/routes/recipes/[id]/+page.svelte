@@ -121,5 +121,5 @@
 </section> -->
 
 <section class="markdown mb-4">
-  {@html data.content?.code}
+  {@html data.content}
 </section>

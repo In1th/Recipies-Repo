@@ -1,23 +1,3 @@
----
-title: Lemon Bars Recipe
-tags:
-    - lemon
-    - dessert
-    - cake
-ingredients:
-    - 1¼ cups plus 3 Tbsp. (179 g) all-purpose flour
-    - ¼ cup (28 g) powdered sugar, plus more for dusting
-    - 1¼ tsp Diamond Crystal or ¾ tsp. Morton kosher salt, divided
-    - 7 Tbsp. chilled unsalted butter, cut into pieces
-    - 2 large egg yolks, divided
-    - 1 cup (200 g) granulated sugar
-    - 2 tsp. finely grated lemon zest
-    - 3 large eggs
-    - ⅔ cup fresh lemon juice
-    - ¼ cup whole milk
-time: 2h
----
-
 Ingredients
 - Makes 16
 

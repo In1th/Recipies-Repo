@@ -1,16 +1,20 @@
 import { error, type Load } from '@sveltejs/kit';
 
-export const load: Load = async ({ params }) => {
+export const load: Load = async ({ params, fetch }) => {
   try{
-    const project = await import(`../../../resources/${params.id}.md`);
-    // console.log({
-    //     content: project.default,
-    //     meta: project.metadata,
-    //     id: params.id
-    // })
+    const res = await fetch(`/blob/recipe/${params.id}`);  
+    
+    const { page, metadata } = await res.json();
+
     return {
-        content: project.default,
-        meta: project.metadata,
+        content: page,
+        meta: {
+          time: '1h',
+          calories: 23,
+          title: 'a',
+          tags: ['a', 'b', 'c'],
+          ingredients: ['a', 'b', 'c']
+        },
         id: params.id
     }
   }

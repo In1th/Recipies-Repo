@@ -120,6 +120,6 @@
   </div>
 </section> -->
 
-<section class="markdown">
-	<svelte:component this={data.content} />
+<section class="markdown mb-4">
+  {@html data.content}
 </section>

@@ -17,5 +17,16 @@ export default defineConfig({
 		port: 80
 	},
 	plugins: [sveltekit()],
+	optimizeDeps: {
+		exclude: ['fs', 'node:fs']
+	},
+	resolve: {
+		alias: [
+			{
+        	  find: 'fs',
+        	  replacement: 'memfs',
+        	},
+		]
+	}
 });
 

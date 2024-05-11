@@ -1,25 +1,3 @@
----
-title: Instant Pot Asian Pulled Pork
-tags:
-    - main_dish
-    - pork
-    - mushroom
-    - asian
-ingredients:
-    - 1 onion (11 oz, 312 g)
-    - 5–6 slices ginger (cut a 1-inch, 2.5 cm knob)
-    - 6 cloves garlic
-    - 1.25 kg pork shoulder (pork butt) (2½–3 lbs pork will work for this recipe)
-    - 2 tsp Diamond Crystal kosher salt
-    - Freshly ground black pepper
-    - 1 Tbsp neutral oil
-    - 360 ml chicken stock/broth
-    - 75 ml soy sauce
-    - 30 ml sake (or substitute dry sherry or Chinese rice wine)
-    - 50 g brown sugar (¼ cup, packed)
-time: 2h
----
-
 # Instant Pot Asian Pulled Pork (Tacos and Rice Bowls)
 
 Prep Time: 15 minutes  

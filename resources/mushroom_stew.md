@@ -1,25 +1,3 @@
----
-title: Mushroom Stew
-tags:
-    - soup
-    - mushroom
-    - asian
-ingredients:
-    - Quarter pound of good pork belly.
-    - Half a cup dried shiitake mushrooms.
-    - Cup button mushrooms.
-    - Cup or two of bamboo shoots.
-    - 2 eggs.
-    - Three or four dried chilis.
-    - Pack of firm tofu.
-    - 1 quart chicken stock.
-    - 1/2 quart beef stock.
-    - Half a cup white vinegar.
-    - Cornstarch slurry (half cup water half cup cornstarch).
-    - Pinch of fried garlic.
-    - 1 scallion.
----
-
 ## Soup Base:
 
 - 2 parts brand dark mushroom soy sauce (most important part).

@@ -25,10 +25,6 @@ public class Recipe{
 	@Column(nullable = false)
 	private String title;
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Category category;
-
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	//@OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "recipe_ingredients")
@@ -36,6 +32,9 @@ public class Recipe{
 
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<Tag> tags;
+
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Category category;
 
 	private String mdFilePath;
 	private String imagePath;

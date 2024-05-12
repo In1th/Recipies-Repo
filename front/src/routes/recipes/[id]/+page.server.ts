@@ -5,7 +5,6 @@ export const load: Load = async ({ params, fetch }) => {
     const res = await fetch(`/blob/recipe/${params.id}`);  
     
     const { page, metadata } = await res.json();
-    console.log(metadata)
     return {
         content: page,
         meta: metadata,
@@ -13,7 +12,6 @@ export const load: Load = async ({ params, fetch }) => {
     }
   }
   catch (e) {
-    console.log(e)
     throw error(404, `Could not not find project`)
   }
 }

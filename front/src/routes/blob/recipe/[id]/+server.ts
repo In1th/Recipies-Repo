@@ -6,7 +6,6 @@ export const GET: RequestHandler = async ({params, fetch}) => {
 
     const res = await fetch(`http://backend:8080/api/v0/recipes/${params.id}`);
     const data = await res.json();
-    console.log(data.recipeIngredients[0].ingredient);
 
     const recipe = await fs.promises.readFile(data.mdFilePath, 'utf8');
     const conv = new Showdown.Converter();

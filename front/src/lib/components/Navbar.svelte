@@ -35,7 +35,7 @@
 
         <!-- RECIPES -->
         <a href="/recipes">
-          Recipes
+          All
         </a>
         <a href="/recipes?cat=soups">Soups</a>
         <a href="/recipes?cat=main">Main dishes</a>

@@ -4,6 +4,7 @@
     import { faker } from '@faker-js/faker';
     import { clickOutside } from "./clickOutside";
     import { fly } from "svelte/transition";
+    import { page } from "$app/stores";
 
     const {
         elements: { root, input, tag, deleteTrigger, edit },
@@ -61,7 +62,6 @@
         const item = (suggestionsWrapper as Element).firstChild;
         if (item) {
             item.dispatchEvent(new FocusEvent('focusin'));
-            console.log(item)
         }
     }
 
@@ -76,80 +76,81 @@
 </script>
 
 
-
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div
-    use:melt={$root}
-    class="relative flex flex-col w-full max-w-[1536px]"
-    use:clickOutside
-    on:click_outside={onFocusOut}
-    >
-    <input
-        use:melt={$input}
-        bind:value={searchText}
-        on:click={onFocusIn}
-        type="text"
-        placeholder="Enter tags..."
-        class="w-full shrink grow basis-0 border-0 rounded-md p-0.5 outline-none focus:!ring-0 data-[invalid]:text-red-500"
-    />
-    {#if $tags.length > 0}
-        <button
-            class="absolute right-0"
-            on:click={clear}
+{#if !$page.url.href.includes('/admin')}    
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div
+        use:melt={$root}
+        class="relative flex flex-col w-full max-w-[1536px]"
+        use:clickOutside
+        on:click_outside={onFocusOut}
         >
-            <X/>
-        </button>
-    {/if}
-    <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md md:px-3 py-2">
-        {#each $tags as t}
-            <div
-                use:melt={$tag(t)}
-                class:green={!t.value.startsWith('-') && !t.value.includes(":")}
-                class:red={t.value.startsWith('-')}
-                class:blue={t.value.includes(":")}
-                class="flex items-center overflow-hidden rounded-xl bg-red"
+        <input
+            use:melt={$input}
+            bind:value={searchText}
+            on:click={onFocusIn}
+            type="text"
+            placeholder="Enter tags..."
+            class="w-full shrink grow basis-0 border-0 rounded-md p-0.5 outline-none focus:!ring-0 data-[invalid]:text-red-500"
+        />
+        {#if $tags.length > 0}
+            <button
+                class="absolute right-0"
+                on:click={clear}
             >
-                {#if ["orderby", "type"].includes(t.value.split(":")[0])}
-                    <span
-                        class="flex items-center border-r border-white/10 px-1.5"
-                        >{t.value.split(":")[0]}</span
+                <X/>
+            </button>
+        {/if}
+        <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md md:px-3 py-2">
+            {#each $tags as t}
+                <div
+                    use:melt={$tag(t)}
+                    class:green={!t.value.startsWith('-') && !t.value.includes(":")}
+                    class:red={t.value.startsWith('-')}
+                    class:blue={t.value.includes(":")}
+                    class="flex items-center overflow-hidden rounded-xl bg-red"
+                >
+                    {#if ["orderby", "type"].includes(t.value.split(":")[0])}
+                        <span
+                            class="flex items-center border-r border-white/10 px-1.5"
+                            >{t.value.split(":")[0]}</span
+                        >
+                    {/if}
+                    <span class="flex items-center border-r border-white/10 px-1.5">
+                        {!t.value.includes(':') ? t.value.replace('-', '') : t.value.split(':')[1]}
+                    </span>
+                    <button
+                        use:melt={$deleteTrigger(t)}
+                        class="flex h-full items-center px-1 enabled:hover:bg-magnum-300"
                     >
-                {/if}
-                <span class="flex items-center border-r border-white/10 px-1.5">
-                    {!t.value.includes(':') ? t.value.replace('-', '') : t.value.split(':')[1]}
-                </span>
-                <button
-                    use:melt={$deleteTrigger(t)}
-                    class="flex h-full items-center px-1 enabled:hover:bg-magnum-300"
-                >
-                    <X class="square-3" />
-                </button>
-            </div>
-            <div
-                use:melt={$edit(t)}
-                class="flex items-center overflow-hidden rounded-md px-1.5 [word-break:break-word] data-[invalid-edit]:focus:!ring-red-500"
-            />
-        {/each}
-    </div>
-    {#if showTags}            
-        <div class="absolute w-full max-h-[250px] top-8 bg-white shadow-lg rounded-md flex flex-col gap-2 p-2 overflow-y-scroll"
-            id="tags-wrapper"
-            bind:this={suggestionsWrapper}
-            transition:fly
-        >
-            {#each filtered as tg}
-                <button class="w-full text-left hover:bg-slate-400 focus:bg-secondary transition p-0.5 rounded-sm"
-                    on:click={() => addNewTag(`${searchText.startsWith('-')? '-': ''}${tg.name}`)}
-                >
-                    {tg.name} ({tg.count})
-                </button>
-            {:else}
-                <p>No results . . .</p>
+                        <X class="square-3" />
+                    </button>
+                </div>
+                <div
+                    use:melt={$edit(t)}
+                    class="flex items-center overflow-hidden rounded-md px-1.5 [word-break:break-word] data-[invalid-edit]:focus:!ring-red-500"
+                />
             {/each}
         </div>
-    {/if}
-</div>
+        {#if showTags}            
+            <div class="absolute w-full max-h-[250px] top-8 bg-white shadow-lg rounded-md flex flex-col gap-2 p-2 overflow-y-scroll"
+                id="tags-wrapper"
+                bind:this={suggestionsWrapper}
+                transition:fly
+            >
+                {#each filtered as tg}
+                    <button class="w-full text-left hover:bg-slate-400 focus:bg-secondary transition p-0.5 rounded-sm"
+                        on:click={() => addNewTag(`${searchText.startsWith('-')? '-': ''}${tg.name}`)}
+                    >
+                        {tg.name} ({tg.count})
+                    </button>
+                {:else}
+                    <p>No results . . .</p>
+                {/each}
+            </div>
+        {/if}
+    </div>
+{/if}
 
 <!-- <button class="flex gap-1 bg-white rounded-3xl items-center px-1">
     <Search />

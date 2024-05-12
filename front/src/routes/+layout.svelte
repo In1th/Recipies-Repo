@@ -6,7 +6,7 @@
 <Navbar/>
 <section class="flex flex-col items-center mx-2 sm:mx-auto max-w-[1280px]">
     <SearchBar/>
-    <section>
+    <section class="w-full">
         <slot/>
     </section>
 </section>

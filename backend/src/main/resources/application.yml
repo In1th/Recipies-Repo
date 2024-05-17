@@ -6,10 +6,11 @@ spring:
     url: jdbc:postgresql://postgres:5432/recipes
     username: postgres
     password: root
+    initialization-mode: always
   # JPA properties
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect

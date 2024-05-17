@@ -6,7 +6,6 @@ spring:
     url: jdbc:postgresql://postgres:5432/recipes
     username: postgres
     password: root
-    initialization-mode: always
   # JPA properties
   jpa:
     hibernate:

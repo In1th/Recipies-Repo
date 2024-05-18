@@ -1,21 +1,23 @@
-FROM node:20-alpine
+# Our Node base image
+FROM --platform=linux/amd64 node:20-alpine
 
-WORKDIR /usr/src/app
+# Set the Node environment to development to ensure all packages are installed
+ENV NODE_ENV development
 
-COPY rollup.config.js ./
-COPY package*.json ./
+# Change our current working directory
+WORKDIR /usr/src/front
 
-RUN npm install
+# Copy over `package.json` and lock files to optimize the build process
+COPY ["package.json", "package-lock.json*", "./"]
+# Install Node modules
+RUN npm ci
 
-COPY ./src ./src
-COPY ./public ./public
+# Copy over rest of the project files
+COPY . .
 
-RUN npm run-script build
+# Builds solution
+RUN npm run build
 
-EXPOSE 5000
+EXPOSE 80
 
-ENV HOST=0.0.0.0
-
-CMD [ "npm", "start" ]
-
-
+ENTRYPOINT [ "npm", "run", "preview" ]

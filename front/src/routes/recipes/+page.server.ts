@@ -1,17 +1,19 @@
 import { fail, type Load } from "@sveltejs/kit";
+import Showdown from 'showdown';
 
 export const load: Load = async ({ fetch }) => {
-    const res = await fetch('http://backend:8080/api/v0/recipes');
+    const path = 'instant_pot_asian_pulled_pork.md';
 
-    if (!res.ok) {
-        return fail(
-            res.status,
-            { message: res.statusText }
-        )
-    }
-    const data = await res.json();
+    try {
+        const data = await fetch(path);
+        const recipe = await data.text()
 
-    return {
-        recipes: data
+        const conv = new Showdown.Converter();
+        return {
+            recipe: conv.makeHtml(recipe),
+            metadata: path
+        };
+    } catch (error) {
+        return fail(500, { message: 'Could not load the recipe file.' });
     }
 };

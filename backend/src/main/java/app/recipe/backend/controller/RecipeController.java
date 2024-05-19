@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://frontend:3000", "http://frontend:80"}, allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v0/recipes")
 public class RecipeController{

@@ -35,7 +35,10 @@ services:
       context: ./front
       dockerfile: Dockerfile.dev
       no_cache: true
-    # image: recipes-front:v0
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_SECRET: ${GOOGLE_SECRET}
+      AUTH_SECRET: ${AUTH_SECRET}
     ports:
       - 3000:3000
       - 3010:3010

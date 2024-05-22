@@ -16,7 +16,7 @@
     });
 
     $: propName = name.toLowerCase();
-    $: formData = `[${$tags.map(t => `"${t.value}"`).join(',')}]`
+    $: formData = $tags.map(t => `${t.value}`).join('|')
   </script>
   
       <div class="flex-grow flex flex-col items-start justify-center gap-2">

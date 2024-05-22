@@ -1,10 +1,12 @@
+import type { RecipeDto } from "$lib/models/RecipeDto";
 import { fail, type Actions } from "@sveltejs/kit"
 import type { Load } from "@sveltejs/kit";
+import * as fs from 'node:fs';
 
 export const actions: Actions = {
-    default: async ({ request }) => {
+    default: async ({ request, fetch }) => {
         const formData = Object.fromEntries(await request.formData());
-        console.log(formData);
+        console.log(formData)
         if (
             !(formData.file as File).name ||
             (formData.file as File).name === 'undefined'
@@ -15,14 +17,59 @@ export const actions: Actions = {
             });
         }
 
-        const { file } = formData as { file: File };
+        const { file, title, ingredients, tags, prepTime, category } = formData as { 
+            file: File, 
+            title: string,
+            category: string
+            ingredients: string,
+            tags: string,
+            prepTime: string
+        };
+        
+    
+        const dto: RecipeDto = {
+            title: title,
+            category: {name: category},
+            recipeIngredients: ingredients? ingredients
+                .split('\r\n')
+                .map(i => ({ingredient: {name: i},quantity: '1'})): [],
+            tags: tags ? tags
+                .split('|')
+                .map(t => ({name: t})): [],
+            mdFilePath: `/var/resources/recipes/${title.toLowerCase().replaceAll(' ', '_')}.md`,
+            imagePath: `/var/resources/images/${title.toLowerCase().replaceAll(' ', '_')}.jpg`,
+            rate: 1
+            // preparationTime: prepTime
+        }
 
-        console.log(file);
+        const res = await fetch('http://backend:8080/api/v0/recipes', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dto)
+        });
+
+        if (!res.ok) {
+            console.log(await res.json())
+            console.log(dto)
+            return fail(400)
+        }
+
+        await fs.promises.writeFile(
+            `/var/resources/recipes/${title.toLowerCase().replaceAll(' ', '_')}.md`,
+            await file.text(), {
+                encoding: "utf8",
+                flag: "w",
+            }
+        );
     }
 }
 
 export const load: Load = async ({fetch}) => {
     const res = await fetch('http://backend:8080/api/v0/category')
 
-    console.log(await res.json());
+    return {
+        categories: await res.json()
+    };
 };

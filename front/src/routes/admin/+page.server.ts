@@ -67,9 +67,11 @@ export const actions: Actions = {
 }
 
 export const load: Load = async ({fetch}) => {
-    const res = await fetch('http://backend:8080/api/v0/category')
+    const resCats = await fetch('http://backend:8080/api/v0/category');
+    const resRecipes = await fetch('http://backend:8080/api/v0/recipes');
 
     return {
-        categories: await res.json()
+        categories: await resCats.json(),
+        recipes: await resRecipes.json()
     };
 };

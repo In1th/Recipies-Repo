@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { createTagsInput, melt } from '@melt-ui/svelte';
+    import { editRecipeStore } from '$lib/stores/editRecipeStore';
+    import { createTagsInput, melt, type Tag } from '@melt-ui/svelte';
     import { X } from 'lucide-svelte';
   
     export let name: string;
@@ -17,6 +18,12 @@
 
     $: propName = name.toLowerCase();
     $: formData = $tags.map(t => `${t.value}`).join('|')
+
+    $: if ($editRecipeStore){
+      $tags = $editRecipeStore.tags.map(t => ({id: t.name, value: t.name} as Tag))
+    } else {
+      $tags = [];
+    }
   </script>
   
       <div class="flex-grow flex flex-col items-start justify-center gap-2">

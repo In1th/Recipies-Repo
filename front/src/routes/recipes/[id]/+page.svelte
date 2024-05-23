@@ -7,7 +7,7 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-  const category = data.meta.category ?? 'No category';
+  const category = data.meta.category.name || 'No category';
 
 	const {
         elements: { root: horizontal },
@@ -59,7 +59,7 @@
 <section class="xl:ml-auto flex-col">
   <h1 class="pb-3">{data.meta.title}</h1>
   <section class="flex flex-col gap-1 pb-3">
-    <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category.name || '-'}</p>
+    <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
     <div class="flex gap-1">
       <Tag/>
       {#each data.meta.tags.slice(0, 3) as tag}

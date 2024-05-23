@@ -9,6 +9,8 @@ export type RecipeDto = {
     rate: number
 }
 
+export type Recipe = RecipeDto & {uuid: string}
+
 export type Category = {name: string}
 export type Tag = {name: string}
 export type Ingredient = {

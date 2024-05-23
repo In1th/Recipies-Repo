@@ -3,12 +3,13 @@
     import { ChevronDown } from "lucide-svelte";
     import { fade } from "svelte/transition";
     import TagsFormInput from "./TagsFormInput.svelte";
+    import { editRecipeStore } from "$lib/stores/editRecipeStore";
 
     export let categories: {name: string}[];
     
     const {
     elements: { trigger, menu, option, label },
-    states: { selectedLabel, open },
+    states: { selectedLabel, open, selected },
     helpers: { isSelected }
     } = createSelect<string>({
     forceVisible: true,
@@ -19,13 +20,26 @@
     },
   });
 
+  $: if ($editRecipeStore){
+    $selected = {
+        label: $editRecipeStore.category.name,
+        value: $editRecipeStore.category.name
+    }
+  } else {
+    $selected = undefined;
+  }
+
+  $: tagInput = ($editRecipeStore?.recipeIngredients.map(i => i.ingredient.name) ?? []).join('\n')
 </script>
 
-<h1 class="pb-4">New recipe</h1>
+<h1 class="pb-4">{$editRecipeStore? "Edit recipe" : 'New recipe'}</h1>
+{#if $editRecipeStore}
+    <p>Id: {$editRecipeStore.uuid}</p>
+{/if}
 <form class="flex flex-col gap-2" method="post" enctype="multipart/form-data">
     <fieldset>
         <label for="title">Title</label>
-        <input name="title" type="text" required />
+        <input name="title" type="text" required value={$editRecipeStore?.title ?? ''}/>
     </fieldset>
     <fieldset>
         <label use:melt={$label} for="category">Category</label>
@@ -62,7 +76,7 @@
     </fieldset>
     <fieldset>
         <label for="prepTime">Preparation time</label>
-        <input name="prepTime" type="text" />
+        <input name="prepTime" type="text"/>
         <p>h</p>
     </fieldset>
     <fieldset>
@@ -73,7 +87,7 @@
     <TagsFormInput name="Tags"/>
     <fieldset class="flex-col w-unset!important">
         <p class="w-full">Ingredients (every indegredient in new line)</p>
-        <textarea name="ingredients" class="w-full"/>
+        <textarea name="ingredients" class="w-full" value={tagInput}/>
     </fieldset>
     <fieldset>
         <label for="image">Image</label>

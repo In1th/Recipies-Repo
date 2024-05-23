@@ -48,7 +48,7 @@ services:
     volumes:
       - ./front:/usr/src/front
       - /usr/src/front/node_modules
-      - recipes_vm:/var/resources/recipes
+      - ./resources/recipes:/var/resources/recipes
 
 volumes:
   postgres_data:
@@ -62,4 +62,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./resources
+      device: ./resources/recipes

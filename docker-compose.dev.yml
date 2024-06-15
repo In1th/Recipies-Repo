@@ -49,6 +49,7 @@ services:
       - ./front:/usr/src/front
       - /usr/src/front/node_modules
       - ./resources/recipes:/var/resources/recipes
+      - ./resources/images:/var/resources/images
 
 volumes:
   postgres_data:

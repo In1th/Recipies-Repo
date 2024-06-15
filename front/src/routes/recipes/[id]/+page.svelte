@@ -54,7 +54,9 @@
 </script>
 
 <section class="flex-1 flex items-center mb-4">
-  <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl"/>
+  <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl" >
+      <img src={data.meta.imagePath ?? 'baba.jpg'} alt="recipe"/>
+  </div>
 </section>
 <section class="xl:ml-auto flex-col">
   <h1 class="pb-3">{data.meta.title}</h1>

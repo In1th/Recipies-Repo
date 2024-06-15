@@ -1,12 +1,13 @@
 import type { RecipeDto } from "$lib/models/RecipeDto";
+import { BackendClient } from "$lib/server/Cient";
 import { fail, type Actions } from "@sveltejs/kit"
 import type { Load } from "@sveltejs/kit";
 import * as fs from 'node:fs';
 
 export const actions: Actions = {
-    default: async ({ request, fetch }) => {
+    new: async ({ request, fetch }) => {
         const formData = Object.fromEntries(await request.formData());
-        console.log(formData)
+
         if (
             !(formData.file as File).name ||
             (formData.file as File).name === 'undefined'
@@ -63,6 +64,22 @@ export const actions: Actions = {
                 flag: "w",
             }
         );
+
+        return { success: true };
+    },
+
+    delete: async (event) => {
+        const formData = Object.fromEntries(await event.request.formData());
+        const {uuid} = formData as {uuid: string}
+        await BackendClient.deleteRecipe(event, uuid);
+
+        return { success: true };
+    },
+
+    update: async (event) => {
+        console.log(await event.request.formData());
+
+        return { success: true };
     }
 }
 

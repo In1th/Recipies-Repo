@@ -4,6 +4,7 @@
     import { fade } from "svelte/transition";
     import TagsFormInput from "./TagsFormInput.svelte";
     import { editRecipeStore } from "$lib/stores/editRecipeStore";
+    import { enhance } from "$app/forms";
 
     export let categories: {name: string}[];
     
@@ -29,14 +30,18 @@
     $selected = undefined;
   }
 
-  $: tagInput = ($editRecipeStore?.recipeIngredients.map(i => i.ingredient.name) ?? []).join('\n')
+  $: tagInput = ($editRecipeStore?.recipeIngredients.map(i => i.ingredient.name) ?? []).join('\n');
+  $: action = $editRecipeStore ? '?/update': '?/new'
 </script>
 
 <h1 class="pb-4">{$editRecipeStore? "Edit recipe" : 'New recipe'}</h1>
 {#if $editRecipeStore}
     <p>Id: {$editRecipeStore.uuid}</p>
 {/if}
-<form class="flex flex-col gap-2" method="post" enctype="multipart/form-data">
+<form class="flex flex-col gap-2" method="post" action={action} use:enhance enctype="multipart/form-data">
+    <fieldset>
+        <input class="hidden" name="uuid" type="text" required value={$editRecipeStore?.uuid ?? ''}/>
+    </fieldset>
     <fieldset>
         <label for="title">Title</label>
         <input name="title" type="text" required value={$editRecipeStore?.title ?? ''}/>
@@ -91,11 +96,11 @@
     </fieldset>
     <fieldset>
         <label for="image">Image</label>
-        <input accept="image/png, image/jpeg" name="image" type="file"/>
+        <input accept="image/png, image/jpeg" name="image" type="file" disabled={!!$editRecipeStore}/>
     </fieldset>
     <fieldset>
         <label for="file">File</label>
-        <input accept=".md" name="file" type="file" />
+        <input accept=".md" name="file" type="file" disabled={!!$editRecipeStore}/>
     </fieldset>
     <input type="submit"/>
 </form>
@@ -117,7 +122,16 @@
         @apply cursor-pointer bg-primary p-1 border-[1px] border-text rounded-md;
     }
 
-    input[type="file"]::file-selector-button {
-        @apply bg-secondary shadow-none px-1 border-0;
+    input[type="file"]{
+        &:disabled {
+            @apply bg-gray-200/70;
+        }
+        &::file-selector-button {
+            @apply bg-secondary shadow-none px-1 border-0;
+
+            &:disabled {
+                @apply text-text;
+            }
+        }
     }
 </style>

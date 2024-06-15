@@ -5,6 +5,8 @@
     createSeparator,
     melt,
     } from '@melt-ui/svelte';
+    import SignIn from './SignIn.svelte';
+    import { page } from '$app/stores';
 
     const {
         elements: { root: vertical },
@@ -41,23 +43,12 @@
         <a href="/recipes?cat=main">Main dishes</a>
         <a href="/recipes?cat=desserts">Desserts</a>
 
-        <div use:melt={$vertical} class="desktop h-4 w-[1px] bg-text"/>
-        <a class="desktop" href="/admin">Dashboard</a>
-        <script src="https://accounts.google.com/gsi/client" async></script>
+        {#if $page.data.session}
+             <div use:melt={$vertical} class="desktop h-4 w-[1px] bg-text"/>
+             <a class="desktop" href="/admin">Dashboard</a>
+        {/if}
         <div class="ml-auto">
-            <div id="g_id_onload"
-                data-client_id="YOUR_GOOGLE_CLIENT_ID"
-                data-login_uri="https://your.domain/your_login_endpoint"
-                data-auto_prompt="false">
-            </div>
-            <div class="g_id_signin"
-                data-type="standard"
-                data-size="large"
-                data-theme="outline"
-                data-text="sign_in_with"
-                data-shape="rectangular"
-                data-logo_alignment="left">
-            </div>
+            <SignIn/>
         </div>
 
         <!-- MENU -->

@@ -1,5 +1,6 @@
 <script>
     import Navbar from '$lib/components/Navbar.svelte';
+    import Toasts from '$lib/components/Toasts.svelte';
     import SearchBar from '$lib/components/searchbar/SearchBar.svelte';
     import './app.css';
 </script>
@@ -9,4 +10,5 @@
     <section class="w-full">
         <slot/>
     </section>
+    <Toasts/>
 </section>

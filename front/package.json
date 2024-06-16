@@ -41,6 +41,7 @@
 	"dependencies": {
 		"@auth/core": "^0.30.0",
 		"@auth/sveltekit": "^1.0.1",
+		"dotenv": "^16.4.5",
 		"memfs": "^4.9.2",
 		"svelte-preprocess": "^5.1.3"
 	}

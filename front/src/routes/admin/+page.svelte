@@ -9,12 +9,12 @@
 
     export let data;
     
-    onMount(() => {
-        if (!data.session){
-            goto('/');
-            return;
-        }
-    })
+    // onMount(() => {
+    //     if (!data.session){
+    //         goto('/');
+    //         return;
+    //     }
+    // })
 
     const onNew = () => {
         $editRecipeStore = undefined;

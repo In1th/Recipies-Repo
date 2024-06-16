@@ -2,9 +2,39 @@ version: '3.8'
 
 name: recipes
 services:
-  front:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_container
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: recipes
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    container_name: backend
+    image: inith/recipe-app-backend:${REV_TAG}
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      no_cache: true
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/recipes
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - postgres
+    restart: always
+
+  frontend:
     container_name: frontend
-    image: inith/recipe-app:${REV_TAG}
+    image: inith/recipe-app-frontend:${REV_TAG}
     restart: always
     build:
       context: ./front
@@ -12,3 +42,23 @@ services:
       no_cache: true
     ports:
       - 80:80
+    depends_on:
+      - backend
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_SECRET: ${GOOGLE_SECRET}
+      AUTH_SECRET: ${AUTH_SECRET}
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./postgres-docker-data
+  recipes_vm:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./resources

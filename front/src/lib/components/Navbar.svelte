@@ -43,10 +43,10 @@
         <a href="/recipes?cat=main">Main dishes</a>
         <a href="/recipes?cat=desserts">Desserts</a>
 
-        {#if $page.data.session}
-             <div use:melt={$vertical} class="desktop h-4 w-[1px] bg-text"/>
-             <a class="desktop" href="/admin">Dashboard</a>
-        {/if}
+        <div use:melt={$vertical} class="desktop h-4 w-[1px] bg-text"/>
+        <a class="desktop" href="/admin">Dashboard</a>
+        <!-- {#if $page.data.session}
+        {/if} -->
         <div class="ml-auto">
             <SignIn/>
         </div>

@@ -35,7 +35,10 @@ services:
       context: ./front
       dockerfile: Dockerfile.dev
       no_cache: true
-    # image: recipes-front:v0
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_SECRET: ${GOOGLE_SECRET}
+      AUTH_SECRET: ${AUTH_SECRET}
     ports:
       - 3000:3000
       - 3010:3010
@@ -45,7 +48,8 @@ services:
     volumes:
       - ./front:/usr/src/front
       - /usr/src/front/node_modules
-      - recipes_vm:/var/resources/recipes
+      - ./resources/recipes:/var/resources/recipes
+      - ./resources/images:/var/resources/images
 
 volumes:
   postgres_data:
@@ -59,4 +63,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./resources
+      device: ./resources/recipes

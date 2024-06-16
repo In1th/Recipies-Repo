@@ -14,7 +14,8 @@ export default {
       'red': colors.red,
       'blue': colors.blue,
       'green': colors.green,
-      'white': colors.white
+      'white': colors.white,
+      'gray': colors.gray,
      },
   },
   plugins: [],

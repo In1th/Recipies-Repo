@@ -9,7 +9,6 @@ rev_tag:
 	export REV_TAG=$(git log -1 --pretty=format:%h)
 
 deploy:
-	docker compose build
 	docker tag recipes-app-backend:$REV_TAG inith/recipe-app-backend &&
 	docker tag recipes-app-frontend:$REV_TAG inith/recipe-app-frontend &7
 	docker push inith/recipe-app-frontend &&

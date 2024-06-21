@@ -7,6 +7,7 @@ import * as fs from 'node:fs';
 export const actions: Actions = {
     new: async ({ request, fetch }) => {
         const formData = Object.fromEntries(await request.formData());
+        console.log(formData);
 
         if (
             !(formData.file as File).name ||

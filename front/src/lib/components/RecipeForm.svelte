@@ -40,7 +40,7 @@
 {/if}
 <form class="flex flex-col gap-2" method="post" action={action} use:enhance enctype="multipart/form-data">
     <fieldset>
-        <input class="hidden" name="uuid" type="text" required value={$editRecipeStore?.uuid ?? ''}/>
+        <!-- <input class="hidden" name="uuid" type="text" value={$editRecipeStore?.uuid ?? ''}/> -->
     </fieldset>
     <fieldset>
         <label for="title">Title</label>

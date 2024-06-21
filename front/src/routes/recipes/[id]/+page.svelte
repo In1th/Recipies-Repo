@@ -13,31 +13,31 @@
         elements: { root: horizontal },
     } = createSeparator();
 
-  const {
-    elements: { item },
-    states: { activeHeadingIdxs, headingsTree },
-  } = createTableOfContents({
-    selector: '.markdown',
-    exclude: ['h1', 'h4', 'h5', 'h6'],
-    activeType: 'all',
-    headingFilterFn: (heading) => !heading.hasAttribute('data-toc-ignore'),
-    scrollFn: (id) => {
-      /**
-       * Here we're overwriting the default scroll function
-       * so that we only scroll within the ToC preview
-       * container, instead of the entire page.
-       */
-      const container = document.getElementById('toc-builder-preview');
-      const element = document.getElementById(id);
+  // const {
+  //   elements: { item },
+  //   states: { activeHeadingIdxs, headingsTree },
+  // } = createTableOfContents({
+  //   selector: '.markdown',
+  //   exclude: ['h1', 'h4', 'h5', 'h6'],
+  //   activeType: 'all',
+  //   headingFilterFn: (heading) => !heading.hasAttribute('data-toc-ignore'),
+  //   scrollFn: (id) => {
+  //     /**
+  //      * Here we're overwriting the default scroll function
+  //      * so that we only scroll within the ToC preview
+  //      * container, instead of the entire page.
+  //      */
+  //     const container = document.getElementById('toc-builder-preview');
+  //     const element = document.getElementById(id);
 
-      if (container && element) {
-        container.scrollTo({
-          top: element.offsetTop - container.offsetTop - 16,
-          behavior: 'smooth',
-        });
-      }
-    },
-  });
+  //     if (container && element) {
+  //       container.scrollTo({
+  //         top: element.offsetTop - container.offsetTop - 16,
+  //         behavior: 'smooth',
+  //       });
+  //     }
+  //   },
+  // });
 
   const {
     elements: { trigger, content, arrow },
@@ -51,11 +51,13 @@
     closeOnPointerDown: false,
     forceVisible: true,
   });
+
+  $: imgUrl = `/blob/image/${data.meta.imagePath.split('/').pop()}`
 </script>
 
 <section class="flex-1 flex items-center mb-4">
-  <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl" >
-      <img src={data.meta.imagePath ?? 'baba.jpg'} alt="recipe"/>
+  <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl overflow-hidden" >
+      <img src={imgUrl} alt="recipe"/>
   </div>
 </section>
 <section class="xl:ml-auto flex-col">
@@ -64,15 +66,15 @@
     <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
     <div class="flex gap-1">
       <Tag/>
-      {#each data.meta.tags.slice(0, 3) as tag}
+      {#each data.meta.tags.slice(0, 10) as tag}
         <p class="py-0.5 px-2 bg-accent rounded-xl">{tag.name}</p>
       {/each}
-      {#if data.meta.tags.slice(3).length > 0}
+      {#if data.meta.tags.slice(10).length > 0}
       <p
         class="py-0.5 px-2 bg-accent rounded-xl"
         use:melt={$trigger}
       >
-        + {data.meta.tags.slice(3).length} more
+        + {data.meta.tags.slice(10).length} more
       </p>
       {#if $open}
         <div
@@ -94,7 +96,7 @@
     </section>
     <section class="flex gap-1">
       <Flame/>
-      {data.meta.calories ?? '-'}
+      {data.meta.calories ?? '-'} kcal
     </section>
   </section>
   

@@ -5,9 +5,12 @@
     import RecipeForm from "$lib/components/RecipeForm.svelte";
     import { editRecipeStore } from "$lib/stores/editRecipeStore";
     import { Plus } from "lucide-svelte";
-    import { onMount } from "svelte";
+    import type { ActionData } from "./$types.js";
+    import { addErrorToast, addSuccessToast } from "$lib/stores/toasterStore.js";
 
     export let data;
+
+	export let form: ActionData;
     
     // onMount(() => {
     //     if (!data.session){
@@ -27,6 +30,27 @@
         open = true;
         uuid = id;
     }
+
+    const successMsg: Record<string, string> = {
+        'new': 'Successfully added new recipe',
+        'update': 'Successfully updated recipe',
+        'delete': 'Successfully deleted recipe'
+    };
+
+    const errorMsg: Record<string, string> = {
+        'new': 'Failed to add new recipe',
+        'update': 'Failed to update recipe',
+        'delete': 'Failed to delete recipe'
+    };
+
+    $: if (form?.success) {
+        addSuccessToast('Added new recipe', successMsg[form.type]);
+        $editRecipeStore = undefined;
+        form = null;
+    } else if (form?.success === false) {
+        addErrorToast('Something went wrong', errorMsg[form.type]);
+        form = null;
+    }
 </script>
 
 <section class="flex w-full">
@@ -42,6 +66,8 @@
         </div>
         {#each data.recipes as recipe}
             <RecipeAdminRecord recipe={recipe} onDelete={setOpen}/>
+        {:else}
+            <p>No recipes yet</p>
         {/each}
         <DeleteDialog dialogOpen={open} recipeId={uuid}/>
     </section>

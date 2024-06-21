@@ -64,3 +64,9 @@ volumes:
       type: none
       o: bind
       device: ./resources/recipes
+  images_vm:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./resources/images

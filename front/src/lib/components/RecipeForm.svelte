@@ -40,9 +40,6 @@
 {/if}
 <form class="flex flex-col gap-2" method="post" action={action} use:enhance enctype="multipart/form-data">
     <fieldset>
-        <!-- <input class="hidden" name="uuid" type="text" value={$editRecipeStore?.uuid ?? ''}/> -->
-    </fieldset>
-    <fieldset>
         <label for="title">Title</label>
         <input name="title" type="text" required value={$editRecipeStore?.title ?? ''}/>
     </fieldset>
@@ -86,7 +83,7 @@
     </fieldset>
     <fieldset>
         <label for="calories">Calories</label>
-        <input name="calories" type="text" />
+        <input name="calories" type="text" value={$editRecipeStore?.calories ?? ''}/>
         <p>kcal</p>
     </fieldset>
     <TagsFormInput name="Tags"/>
@@ -102,10 +99,27 @@
         <label for="file">File</label>
         <input accept=".md" name="file" type="file" disabled={!!$editRecipeStore}/>
     </fieldset>
+    <section class="hidden">
+        <input  
+            name="uuid"
+            type="text"
+            value={$editRecipeStore?.uuid ?? ''}
+        />
+        <input  
+            name="mdFilePath"
+            type="text"
+            value={$editRecipeStore?.mdFilePath ?? ''}
+        />
+        <input  
+            name="imagePath"
+            type="text"
+            value={$editRecipeStore?.imagePath ?? ''}
+        />
+    </section>
     <input type="submit"/>
 </form>
 
-<style>
+<style lang="postcss">
     fieldset {
         @apply flex gap-2 items-center;
 

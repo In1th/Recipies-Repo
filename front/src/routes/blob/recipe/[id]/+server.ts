@@ -1,17 +1,29 @@
 import type { RequestHandler } from "@sveltejs/kit";
-import * as fs from 'node:fs';
+import * as fs from 'fs';
 import Showdown from 'showdown';
 
-export const GET: RequestHandler = async ({params, fetch}) => {
+export const GET: RequestHandler = async ({ params }) => {
+    console.log("GET processing");
 
-    const res = await fetch(`http://backend:8080/api/v0/recipes/${params.id}`);
-    const data = await res.json();
+    const name = params.id; // Zakładam, że nazwa pliku jest w params.id
+    const path = `/var/resources/recipes/${name}.md`;
 
-    const recipe = await fs.promises.readFile(data.mdFilePath, 'utf8');
-    const conv = new Showdown.Converter();
+    try {
+        const recipe = await fs.promises.readFile(path, 'utf8');
+        const conv = new Showdown.Converter();
+        const page = conv.makeHtml(recipe);
 
-    return new Response(JSON.stringify({
-        page: conv.makeHtml(recipe),
-        metadata: data
-    }));
+        return new Response(JSON.stringify({
+            page,
+            metadata: name
+        }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({ message: 'Could not load the recipe file.' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
 };

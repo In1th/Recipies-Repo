@@ -18,6 +18,10 @@ public class Category {
 	@Column(unique = true, nullable = false, updatable = false)
 	private UUID uuid;
 	private String name;
+
+	public Category(String name) {
+		this.name = name;
+	}
 }
 
 /*	CAKES_AND_PIES,

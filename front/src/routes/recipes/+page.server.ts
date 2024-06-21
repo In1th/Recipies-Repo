@@ -1,19 +1,27 @@
 import { fail, type Load } from "@sveltejs/kit";
 import Showdown from 'showdown';
+import * as fs from 'fs';
 
-export const load: Load = async ({ fetch }) => {
-    const path = 'instant_pot_asian_pulled_pork.md';
+export const load: Load = async ({ params }) => {
+    console.log("Load() processing");
+    const name = 'instant_pot_asian_pulled_pork'; // Zakładam, że nazwa pliku jest w params.name
+    const path = `/var/resources/recipes/${name}.md`;
 
     try {
-        const data = await fetch(path);
-        const recipe = await data.text()
-
+        console.log("BEFORE readFile()");
+        const data = await fs.promises.readFile(path, 'utf8');
         const conv = new Showdown.Converter();
+        const recipe = conv.makeHtml(data);
+
+        console.log("recipe log");
+        console.log(recipe);
+
         return {
-            recipe: conv.makeHtml(recipe),
-            metadata: path
+            recipe,
+            metadata: name
         };
     } catch (error) {
+        console.error(error);
         return fail(500, { message: 'Could not load the recipe file.' });
     }
 };

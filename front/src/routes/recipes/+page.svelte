@@ -3,8 +3,10 @@
 </script>
 
 <div class="flex flex-col">
-    <!--<div>{@html  data.recipe}</div>-->
-    {#each data.data as recipe}
-        <a href={`/recipes/${recipe.uuid}`}>{recipe.title}</a>
-    {/each}
+    {#if data.recipe}
+        <div>{@html data.recipe}</div>
+        <p>Metadata: {data.metadata}</p>
+    {:else}
+        <p>No recipe found.</p>
+    {/if}
 </div>

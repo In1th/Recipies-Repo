@@ -101,14 +101,14 @@
                 <X/>
             </button>
         {/if}
-        <div class="flex flex-row w-full flex-wrap gap-2.5 rounded-md md:px-3 py-2">
+        <div class="flex flex-row w-full min-h-16 flex-wrap gap-2.5 rounded-md md:px-3 py-2">
             {#each $tags as t}
                 <div
                     use:melt={$tag(t)}
                     class:green={!t.value.startsWith('-') && !t.value.includes(":")}
                     class:red={t.value.startsWith('-')}
                     class:blue={t.value.includes(":")}
-                    class="flex items-center overflow-hidden rounded-xl bg-red"
+                    class="flex items-center overflow-hidden rounded-xl bg-red h-fit"
                 >
                     {#if ["orderby", "type"].includes(t.value.split(":")[0])}
                         <span
@@ -133,7 +133,7 @@
             {/each}
         </div>
         {#if showTags}            
-            <div class="absolute w-full max-h-[250px] top-8 bg-white shadow-lg rounded-md flex flex-col gap-2 p-2 overflow-y-scroll"
+            <div class="absolute w-full max-h-[250px] top-8 bg-white shadow-lg rounded-md flex flex-col gap-2 p-2 overflow-y-scroll z-[999]"
                 id="tags-wrapper"
                 bind:this={suggestionsWrapper}
                 transition:fly

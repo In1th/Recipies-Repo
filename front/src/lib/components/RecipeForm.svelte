@@ -38,7 +38,7 @@
 {#if $editRecipeStore}
     <p>Id: {$editRecipeStore.uuid}</p>
 {/if}
-<form class="flex flex-col gap-2" method="post" action={action} use:enhance enctype="multipart/form-data">
+<form class="flex flex-col gap-2 w-[450px]" method="post" action={action} use:enhance enctype="multipart/form-data">
     <fieldset>
         <label for="title">Title</label>
         <input name="title" type="text" required value={$editRecipeStore?.title ?? ''}/>
@@ -133,7 +133,7 @@
     }
 
     input[type="submit"] {
-        @apply cursor-pointer bg-primary p-1 border-[1px] border-text rounded-md;
+        @apply cursor-pointer bg-primary p-1 shadow-lg rounded-md;
     }
 
     input[type="file"]{

@@ -1,24 +1,24 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
-    import { createDialog, melt } from '@melt-ui/svelte'
+    import type { DialogType } from '$lib/types';
+    import { melt } from '@melt-ui/svelte'
     import { fade } from 'svelte/transition';
 
-    export let dialogOpen: boolean;
     export let recipeId: string;
+
+    export let props: DialogType;
 
     const {
       elements: { portalled, overlay, content, title, description },
       states: { open }
-    } = createDialog({
-        forceVisible: true,
-    });
+    } = props;
 
     const close = () => {
-        dialogOpen = false;
+        $open = false;
     }
 </script>
 
-{#if dialogOpen}
+{#if $open}
   <form method="POST" use:enhance use:melt={$portalled}>
     <input bind:value={recipeId} class="hidden" name="uuid"/>
     <div
@@ -39,7 +39,7 @@
   </form>
 {/if}
 
-<style>
+<style lang="postcss">
     button {
         @apply p-1 px-2 rounded-md;
     }

@@ -1,8 +1,10 @@
 <script>
-  import { createTableOfContents, createSeparator, melt, createTooltip } from '@melt-ui/svelte';
+  import { createTableOfContents, createSeparator, melt } from '@melt-ui/svelte';
 	import Ingredient from './Ingredient.svelte';
-    import { Clock, Flame, Tag } from 'lucide-svelte';
-    import { fade } from 'svelte/transition';
+  import { Clock, Flame, Tag } from 'lucide-svelte';
+  import { fade } from 'svelte/transition';
+  import Image from '$lib/components/Image.svelte';
+    import TagsView from '$lib/components/TagsView.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -38,26 +40,11 @@
   //     }
   //   },
   // });
-
-  const {
-    elements: { trigger, content, arrow },
-    states: { open },
-  } = createTooltip({
-    positioning: {
-      placement: 'bottom',
-    },
-    openDelay: 0,
-    closeDelay: 0,
-    closeOnPointerDown: false,
-    forceVisible: true,
-  });
-
-  $: imgUrl = `/blob/image/${data.meta.imagePath.split('/').pop()}`
 </script>
 
 <section class="flex-1 flex items-center mb-4">
   <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl overflow-hidden" >
-      <img src={imgUrl} alt="recipe"/>
+    <Image imagePath={data.meta.imagePath} placeholder="baba.jpg" alt={data.meta.title}/>
   </div>
 </section>
 <section class="xl:ml-auto flex-col">
@@ -66,29 +53,7 @@
     <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
     <div class="flex gap-1">
       <Tag/>
-      {#each data.meta.tags.slice(0, 10) as tag}
-        <p class="py-0.5 px-2 bg-accent rounded-xl">{tag.name}</p>
-      {/each}
-      {#if data.meta.tags.slice(10).length > 0}
-      <p
-        class="py-0.5 px-2 bg-accent rounded-xl"
-        use:melt={$trigger}
-      >
-        + {data.meta.tags.slice(10).length} more
-      </p>
-      {#if $open}
-        <div
-          use:melt={$content}
-          transition:fade={{ duration: 100 }}
-          class="z-10 rounded-lg bg-secondary shadow px-4 py-1"
-        >
-          <div use:melt={$arrow} />
-          {#each data.meta.tags.slice(3) as tag}
-            <li>{tag.name}</li>
-          {/each}
-        </div>
-        {/if}
-      {/if}
+      <TagsView tags={data.meta.tags} maxNoOfTags={10}/>
     </div>
     <section class="flex gap-1">
       <Clock/>

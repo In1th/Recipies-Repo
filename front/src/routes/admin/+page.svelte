@@ -9,6 +9,7 @@
     import { addErrorToast, addSuccessToast } from "$lib/stores/toasterStore.js";
     import type { Recipe } from "$lib/models/RecipeDto.js";
     import { createDialog } from "@melt-ui/svelte";
+    import RecipeAdminTable from "$lib/components/recipe/RecipeAdminTable.svelte";
 
     export let data;
 
@@ -25,11 +26,9 @@
         $editRecipeStore = undefined;
     }
 
-    let open = false;
     let uuid = ''
 
     const setOpen = (id: string) => {
-        open = true;
         uuid = id;
     }
 
@@ -71,16 +70,7 @@
                 <Plus/>
             </button>
         </div>
-        <div class="grid grid-cols-6 border-b border-text-500 pt-3">
-            <h2 class="col-span-3">Id</h2>
-            <h2 class="col-span-2">Title</h2>
-            <span/>
-        </div>
-        {#each filtered as recipe}
-            <RecipeAdminRecord recipe={recipe} onDelete={setOpen} trigger={props.elements.trigger}/>
-        {:else}
-            <p>{searchVal ? 'No results' : 'No recipes'}</p>
-        {/each}
+        <RecipeAdminTable recipes={filtered} searchVal={searchVal} setOpen={setOpen} trigger={props.elements.trigger}/>
         <DeleteDialog recipeId={uuid} props={props}/>
     </section>
     <section class="flex flex-col items-center">

@@ -67,7 +67,7 @@
   <section class="flex flex-col w-full gap-1 p-4 bg-secondary-500 rounded-xl shadow-xl my-4">
     <h3 class="font-bold">Ingredients</h3>
     <div class="w-full h-[1px] bg-text-500" use:melt={$horizontal}/>
-    <div class="flex flex-col flex-wrap gap-1 xl:max-h-[500px] overflow-x-scroll">
+    <div class="flex flex-col flex-wrap gap-1 xl:max-h-[400px] overflow-x-scroll">
       {#each data.meta.recipeIngredients as ingredient}
         <Ingredient description={ingredient.ingredient.name}/>
       {/each}

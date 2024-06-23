@@ -1,5 +1,5 @@
 <script>
-    import { ChefHat , Menu } from 'lucide-svelte';
+    import { ChefHat, Menu } from 'lucide-svelte';
     import {
     createMenubar,
     melt,
@@ -31,9 +31,9 @@
             <b class=" hidden sm:block">Gotuje</b>
         </a>
 
-        <a class="desktop" href="/admin">Dashboard</a>
-        <!-- {#if $page.data.session}
-        {/if} -->
+        {#if $page.data.session}
+            <a class="desktop" href="/admin">Dashboard</a>
+        {/if}
         <div class="ml-auto">
             <SignIn/>
         </div>
@@ -52,14 +52,12 @@
         >
             <a href="/admin">Dashboard</a>
             <div class="w-full h-[1px] bg-text-500" use:melt={$sepBurger}/>
-            <button>
-                <span>Sign with Google</span>
-            </button>
+            <SignIn/>
         </div>
     </section>
 </nav>
 
-<style>
+<style lang="postcss">
     .desktop {
         @apply hidden md:block;
     }

@@ -1,15 +1,8 @@
-// import type { LayoutServerLoad } from "./$types"
+import type { LayoutServerLoad } from "./$types"
 
-import { fail, type Load } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 
-// export const load: LayoutServerLoad = async (event) => {
-//     return {
-//       session: await event.locals.auth(),
-//     }
-// }
-
-export const load: Load = async ({ url, fetch }) => {
-    const cat = url.searchParams.get('cat');
+export const load: LayoutServerLoad = async ({ fetch, locals }) => {
     const res = await fetch('http://backend:8080/api/v0/recipes');
 
     if (!res.ok) {
@@ -21,6 +14,7 @@ export const load: Load = async ({ url, fetch }) => {
     const data = await res.json();
 
     return {
-        recipes: data
+        recipes: data,
+        session: await locals.auth(),
     }
 };

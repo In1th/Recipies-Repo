@@ -1,8 +1,8 @@
 import { fromNewRecipeData, fromUpdatedRecipeData } from "$lib/mappers";
-import type { NewRecipeFormData, RecipeDto, UpdateRecipeFormData } from "$lib/models/RecipeDto";
+import type { NewRecipeFormData, UpdateRecipeFormData } from "$lib/models/RecipeDto";
 import { BackendClient } from "$lib/server/Cient";
-import { type Actions } from "@sveltejs/kit"
-import type { Load } from "@sveltejs/kit";
+import { redirect, type Actions } from "@sveltejs/kit"
+import type { ServerLoad } from "@sveltejs/kit";
 import * as fs from 'node:fs';
 
 export const actions: Actions = {
@@ -66,7 +66,12 @@ export const actions: Actions = {
     }
 }
 
-export const load: Load = async ({fetch}) => {
+export const load: ServerLoad = async ({fetch, locals}) => {
+    const auth = await locals.auth();
+    if (!auth) {
+        throw redirect(303, '/');
+    }
+
     const resCats = await fetch('http://backend:8080/api/v0/category');
     const resRecipes = await fetch('http://backend:8080/api/v0/recipes');
 

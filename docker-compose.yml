@@ -36,8 +36,8 @@ services:
       dockerfile: Dockerfile.dev
       no_cache: true
     environment:
-      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
-      GOOGLE_SECRET: ${GOOGLE_SECRET}
+      AUTH_AUTH0_ID: ${AUTH_AUTH0_ID}
+      AUTH_AUTH0_SECRET: ${AUTH_AUTH0_SECRET}
       AUTH_SECRET: ${AUTH_SECRET}
     ports:
       - 3000:3000

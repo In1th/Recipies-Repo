@@ -5,7 +5,7 @@ export const fromNewRecipeData = (recipe: NewRecipeFormData & {imageExtension: s
     category: {name: recipe.category},
     recipeIngredients: toIngredients(recipe.ingredients),
     tags: toTags(recipe.tags),
-    prepTime: recipe.calories,
+    prepTime: recipe.prepTime,
     mdFilePath: `/var/resources/recipes/${recipe.title.toLowerCase().replaceAll(' ', '_')}.md`,
     imagePath: `/var/resources/images/${recipe.title.toLowerCase().replaceAll(' ', '_')}.${recipe.imageExtension}`,
     rate: 1,

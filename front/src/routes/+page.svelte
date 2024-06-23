@@ -1,5 +1,5 @@
 <script>
-    import RecipeGrid from "$lib/components/RecipeGrid.svelte";
+    import RecipeGrid from "$lib/components/recipe/RecipeGrid.svelte";
 
     export let data;
 </script>

@@ -1,6 +1,6 @@
-import { credentialsSchema } from "$lib/zod"
+import { credentialsSchema } from "$lib"
 import Credentials from "@auth/core/providers/credentials"
-import  { SvelteKitAuth, type DefaultSession,  } from "@auth/sveltekit"
+import  { SvelteKitAuth } from "@auth/sveltekit"
  
 declare module "@auth/sveltekit" {
   interface User {

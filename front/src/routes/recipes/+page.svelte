@@ -1,5 +1,5 @@
 <script>
-    import RecipeHighlight from "$lib/components/RecipeHighlight.svelte";
+    import RecipeHighlight from "$lib/components/recipe/RecipeHighlight.svelte";
 
     export let data;
 </script>

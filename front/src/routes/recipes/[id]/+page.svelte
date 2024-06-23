@@ -1,8 +1,7 @@
 <script>
-  import { createTableOfContents, createSeparator, melt } from '@melt-ui/svelte';
+  import { createSeparator, melt } from '@melt-ui/svelte';
 	import Ingredient from './Ingredient.svelte';
   import { Clock, Flame, Tag } from 'lucide-svelte';
-  import { fade } from 'svelte/transition';
   import Image from '$lib/components/Image.svelte';
     import TagsView from '$lib/components/TagsView.svelte';
 

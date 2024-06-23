@@ -1,8 +1,8 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import DeleteDialog from "$lib/components/DeleteDialog.svelte";
-    import RecipeAdminRecord from "$lib/components/RecipeAdminRecord.svelte";
-    import RecipeForm from "$lib/components/RecipeForm.svelte";
+    import RecipeAdminRecord from "$lib/components/recipe/RecipeAdminRecord.svelte";
+    import RecipeForm from "$lib/components/recipe/RecipeForm.svelte";
     import { editRecipeStore } from "$lib/stores/editRecipeStore";
     import { Plus } from "lucide-svelte";
     import type { ActionData } from "./$types.js";

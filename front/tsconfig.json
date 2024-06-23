@@ -12,7 +12,8 @@
 		"moduleResolution": "bundler"
 	},
 	"include": [
-		"./**/*.ts",  ".svelte-kit/ambient.d.ts"
+		"./**/*.ts",
+		// ".svelte-kit/ambient.d.ts"
 	]	
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//

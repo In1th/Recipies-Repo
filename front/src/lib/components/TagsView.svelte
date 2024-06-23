@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Tag } from "$lib/models/RecipeDto";
+    import type { Tag } from "$lib/models";
     import { createTooltip, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
 
@@ -21,11 +21,11 @@
 </script>
 
 {#each tags.slice(0, maxNoOfTags) as tag}
-    <p class="py-0.5 px-2 bg-accent rounded-xl">{tag.name}</p>
+    <p class="py-0.5 px-2 bg-accent-500 rounded-xl">{tag.name}</p>
 {/each}
 {#if tags.slice(maxNoOfTags).length > 0}
 <p
-  class="py-0.5 px-2 bg-accent rounded-xl z-50"
+  class="py-0.5 px-2 bg-accent-500 rounded-xl z-50"
   use:melt={$trigger}
 >
   + {tags.slice(maxNoOfTags).length} more
@@ -34,7 +34,7 @@
   <div
     use:melt={$content}
     transition:fade={{ duration: 100 }}
-    class="z-10 rounded-lg bg-secondary shadow px-4 py-1"
+    class="z-10 rounded-lg bg-secondary-500 shadow px-4 py-1"
   >
     <div use:melt={$arrow} />
     {#each tags.slice(maxNoOfTags) as tag}

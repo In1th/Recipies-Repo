@@ -1,4 +1,8 @@
-<section class="flex flex-col text-center">
-    <h1>Welcome to the Recipes.</h1>
-    <p>This is not Ania gotuje I promise</p>
+<script>
+    import RecipeGrid from "$lib/components/RecipeGrid.svelte";
+
+    export let data;
+</script>
+<section class="flex flex-col justify-center items-center">
+    <RecipeGrid recipes={data.recipes}/>
 </section>

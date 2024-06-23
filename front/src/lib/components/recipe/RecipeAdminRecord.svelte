@@ -1,7 +1,7 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
-    import type { Recipe } from "$lib/models/RecipeDto";
-    import { editRecipeStore } from "$lib/stores/editRecipeStore";
+    import type { Recipe } from "$lib/models/";
+    import { editRecipeStore } from "$lib/stores/";
     import type { DialogTriggerType } from "$lib/types";
     import { melt } from "@melt-ui/svelte";
     import { Pencil, SquareArrowOutUpRight, Trash } from "lucide-svelte";
@@ -15,7 +15,7 @@
     };
 </script>
 
-<form method="POST" use:enhance class="grid grid-cols-6 hover:bg-secondary hover:bg-opacity-30">
+<form method="POST" use:enhance class="grid grid-cols-6 hover:bg-secondary-500 hover:bg-opacity-30">
     <input name="uuid" value={recipe.uuid} class="hidden"/>
     <h2 class="col-span-3">{recipe.uuid}</h2>
     <h2 class="col-span-2">{recipe.title}</h2>
@@ -32,6 +32,6 @@
     }
 
     form:nth-child(2n){
-        @apply bg-secondary bg-opacity-30 hover:bg-opacity-60
+        @apply bg-secondary-500 bg-opacity-30 hover:bg-opacity-60
     }
 </style>

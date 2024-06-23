@@ -2,8 +2,8 @@
     import { createSelect, melt } from "@melt-ui/svelte";
     import { ChevronDown } from "lucide-svelte";
     import { fade } from "svelte/transition";
-    import TagsFormInput from "./TagsFormInput.svelte";
-    import { editRecipeStore } from "$lib/stores/editRecipeStore";
+    import TagsFormInput from "$lib/components/TagsFormInput.svelte";
+    import { editRecipeStore } from "$lib/stores";
     import { enhance } from "$app/forms";
 
     export let categories: {name: string}[];
@@ -63,7 +63,7 @@
             >
             {#each categories as cat}
                 <div
-                    class="bg-white hover:bg-secondary hover:bg-opacity-50 transition px-1"
+                    class="bg-white hover:bg-secondary-500 hover:bg-opacity-50 transition px-1"
                   use:melt={$option({ value: cat.name, label: cat.name })}
                 >
                   <!-- <div class="">
@@ -128,12 +128,12 @@
         }
 
         & > input, & > button, & > textarea {
-            @apply flex-grow border-text border-[1px] rounded-md bg-white overflow-hidden;
+            @apply flex-grow border-text-500 border-[1px] rounded-md bg-white overflow-hidden;
         }
     }
 
     input[type="submit"] {
-        @apply cursor-pointer bg-primary p-1 shadow-lg rounded-md;
+        @apply cursor-pointer bg-primary-500 p-1 shadow-lg rounded-md;
     }
 
     input[type="file"]{
@@ -141,10 +141,10 @@
             @apply bg-gray-200/70;
         }
         &::file-selector-button {
-            @apply bg-secondary shadow-none px-1 border-0;
+            @apply bg-secondary-500 shadow-none px-1 border-0;
 
             &:disabled {
-                @apply text-text;
+                @apply text-text-500;
             }
         }
     }

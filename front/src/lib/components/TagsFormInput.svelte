@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { editRecipeStore } from '$lib/stores/editRecipeStore';
+    import { editRecipeStore } from '$lib/stores';
     import { createTagsInput, melt, type Tag } from '@melt-ui/svelte';
     import { X } from 'lucide-svelte';
   
@@ -31,12 +31,12 @@
   <input name={propName} bind:value={formData} class="hidden"/>
   <div
     use:melt={$root}
-    class="flex w-full flex-row flex-wrap gap-2.5 rounded-md bg-white px-3 py-2 border-text border-[1px]"
+    class="flex w-full flex-row flex-wrap gap-2.5 rounded-md bg-white px-3 py-2 border-text-500 border-[1px]"
   >
     {#each $tags as t}
       <div
         use:melt={$tag(t)}
-        class="flex items-center overflow-hidden rounded-md bg-primary"
+        class="flex items-center overflow-hidden rounded-md bg-primary-500"
       >
         <span class="flex items-center border-r border-white/10 px-1.5"
           >{t.value}</span

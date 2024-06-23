@@ -3,7 +3,7 @@
     import { X } from "lucide-svelte";
     import { flip } from "svelte/animate";
     import { fly } from "svelte/transition";
-    import { toasterStore } from '$lib/stores/toasterStore';
+    import { toasterStore } from '$lib/stores';
   
     const {
       elements: { content, title, description, close },
@@ -22,7 +22,7 @@
       animate:flip={{ duration: 500 }}
       in:fly={{ duration: 150, x: '100%' }}
       out:fly={{ duration: 150, x: '100%' }}
-      class="rounded-lg bg-secondary shadow-md"
+      class="rounded-lg bg-secondary-500 shadow-md"
     >
       <div
         class="relative flex w-[24rem] max-w-[calc(100vw-2rem)] items-center justify-between gap-4 p-5"
@@ -42,7 +42,7 @@
         <button
           use:melt={$close(id)}
           class="absolute right-4 top-4 grid size-6 place-items-center rounded-full
-          hover:bg-primary/50"
+          hover:bg-primary-500/50"
         >
           <X class="size-4" />
         </button>

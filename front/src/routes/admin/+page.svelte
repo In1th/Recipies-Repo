@@ -67,11 +67,11 @@
     <section class="flex flex-col">
         <div class="flex w-full gap-4">
             <input placeholder="Search" bind:value={searchVal}/>
-            <button on:mousedown={onNew} class="flex ml-auto bg-primary p-1 w-fit rounded-md shadow-lg">
+            <button on:mousedown={onNew} class="flex ml-auto bg-primary-500 p-1 w-fit rounded-md shadow-lg">
                 <Plus/>
             </button>
         </div>
-        <div class="grid grid-cols-6 border-b border-text pt-3">
+        <div class="grid grid-cols-6 border-b border-text-500 pt-3">
             <h2 class="col-span-3">Id</h2>
             <h2 class="col-span-2">Title</h2>
             <span/>
@@ -93,6 +93,6 @@
         @apply min-w-[640px] p-2;
     }
     input {
-        @apply rounded-md border-[1px] border-text bg-white p-1 w-full;
+        @apply rounded-md border-[1px] border-text-500 bg-white p-1 w-full;
     }
 </style>

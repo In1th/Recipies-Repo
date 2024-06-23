@@ -1,27 +1,22 @@
-import { fail, type Load } from "@sveltejs/kit";
-import Showdown from 'showdown';
-import * as fs from 'fs';
+import { fail } from '@sveltejs/kit';
+import * as fs from 'fs/promises';
 
-export const load: Load = async ({ params }) => {
-    console.log("Load() processing");
-    const name = 'instant_pot_asian_pulled_pork'; // Zakładam, że nazwa pliku jest w params.name
-    const path = `/var/resources/recipes/${name}.md`;
+export async function load() {
+
+    //K1: powinno sie pobrac wszystkie rekordy z przepisami z bazy jako json
 
     try {
-        console.log("BEFORE readFile()");
-        const data = await fs.promises.readFile(path, 'utf8');
-        const conv = new Showdown.Converter();
-        const recipe = conv.makeHtml(data);
+        const dirPath = '/var/resources/recipes';
+        const files = await fs.readdir(dirPath);
 
-        console.log("recipe log");
-        console.log(recipe);
+        const recipes = await Promise.all(files.map(async (file) => {
+            const content = await fs.readFile(`${dirPath}/${file}`, 'utf8');
+            return { file, content };
+        }));
 
-        return {
-            recipe,
-            metadata: name
-        };
+        return { recipes };
     } catch (error) {
         console.error(error);
-        return fail(500, { message: 'Could not load the recipe file.' });
+        return fail(500, { message: 'Could not load the recipes.' });
     }
-};
+}

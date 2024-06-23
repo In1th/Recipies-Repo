@@ -5,7 +5,7 @@ import Showdown from 'showdown';
 export const GET: RequestHandler = async ({ params }) => {
     console.log("GET processing");
 
-    const name = params.id; // Zakładam, że nazwa pliku jest w params.id
+    const name = params.id;
     const path = `/var/resources/recipes/${name}.md`;
 
     try {

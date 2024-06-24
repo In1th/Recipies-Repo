@@ -1,6 +1,7 @@
 package app.recipe.backend.service;
 
 import app.recipe.backend.model.Recipe;
+import app.recipe.backend.repository.CategoryRepository;
 import app.recipe.backend.repository.RecipeRepository;
 import app.recipe.backend.service.interfaces.RecipeService;
 
@@ -17,9 +18,12 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired
 	private RecipeRepository recipeRepository;
 
+	@Autowired
+	private CategoryRepository categoryRepository;
+
 	@Override
-	public Recipe add(Recipe object) {
-		return recipeRepository.save(object);
+	public Recipe add(Recipe recipe) {
+		return recipeRepository.save(recipe);
 	}
 
 	@Override

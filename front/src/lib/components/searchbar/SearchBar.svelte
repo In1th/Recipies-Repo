@@ -6,6 +6,8 @@
     import { fly } from "svelte/transition";
     import { page } from "$app/stores";
 
+    export let searchStore;
+
     const {
         elements: { root, input, tag, deleteTrigger, edit },
         states: { tags },
@@ -16,7 +18,7 @@
         editable: true,
         add(tag) {
             searchText = '';
-            
+
             if ($tags.find(t => t.id === tag.replace('-', ''))){
                 return Promise.reject();
             }
@@ -76,7 +78,7 @@
 </script>
 
 
-{#if !$page.url.href.includes('/admin')}    
+{#if !$page.url.href.includes('/admin')}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
@@ -87,7 +89,7 @@
         >
         <input
             use:melt={$input}
-            bind:value={searchText}
+            bind:value={$searchStore.search}
             on:click={onFocusIn}
             type="text"
             placeholder="Enter tags..."
@@ -132,7 +134,7 @@
                 />
             {/each}
         </div>
-        {#if showTags}            
+        {#if showTags}
             <div class="absolute w-full max-h-[250px] top-8 bg-white shadow-lg rounded-md flex flex-col gap-2 p-2 overflow-y-scroll"
                 id="tags-wrapper"
                 bind:this={suggestionsWrapper}
@@ -156,6 +158,7 @@
     <Search />
     <span>Search</span>
 </button> -->
+
 
 <style>
     .blue {

@@ -1,90 +1,58 @@
 <script>
-  import { createTableOfContents, createSeparator, melt, createTooltip } from '@melt-ui/svelte';
+  import { createSeparator, melt } from '@melt-ui/svelte';
 	import Ingredient from './Ingredient.svelte';
-    import { Clock, Flame, Tag } from 'lucide-svelte';
-    import { fade } from 'svelte/transition';
+  import { Clock, Flame, Tag } from 'lucide-svelte';
+  import Image from '$lib/components/Image.svelte';
+    import TagsView from '$lib/components/TagsView.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-  const category = data.meta.category ?? 'No category';
+  const category = data.meta.category.name || 'No category';
 
 	const {
         elements: { root: horizontal },
     } = createSeparator();
 
-  const {
-    elements: { item },
-    states: { activeHeadingIdxs, headingsTree },
-  } = createTableOfContents({
-    selector: '.markdown',
-    exclude: ['h1', 'h4', 'h5', 'h6'],
-    activeType: 'all',
-    headingFilterFn: (heading) => !heading.hasAttribute('data-toc-ignore'),
-    scrollFn: (id) => {
-      /**
-       * Here we're overwriting the default scroll function
-       * so that we only scroll within the ToC preview
-       * container, instead of the entire page.
-       */
-      const container = document.getElementById('toc-builder-preview');
-      const element = document.getElementById(id);
+  // const {
+  //   elements: { item },
+  //   states: { activeHeadingIdxs, headingsTree },
+  // } = createTableOfContents({
+  //   selector: '.markdown',
+  //   exclude: ['h1', 'h4', 'h5', 'h6'],
+  //   activeType: 'all',
+  //   headingFilterFn: (heading) => !heading.hasAttribute('data-toc-ignore'),
+  //   scrollFn: (id) => {
+  //     /**
+  //      * Here we're overwriting the default scroll function
+  //      * so that we only scroll within the ToC preview
+  //      * container, instead of the entire page.
+  //      */
+  //     const container = document.getElementById('toc-builder-preview');
+  //     const element = document.getElementById(id);
 
-      if (container && element) {
-        container.scrollTo({
-          top: element.offsetTop - container.offsetTop - 16,
-          behavior: 'smooth',
-        });
-      }
-    },
-  });
-
-  const {
-    elements: { trigger, content, arrow },
-    states: { open },
-  } = createTooltip({
-    positioning: {
-      placement: 'bottom',
-    },
-    openDelay: 0,
-    closeDelay: 0,
-    closeOnPointerDown: false,
-    forceVisible: true,
-  });
+  //     if (container && element) {
+  //       container.scrollTo({
+  //         top: element.offsetTop - container.offsetTop - 16,
+  //         behavior: 'smooth',
+  //       });
+  //     }
+  //   },
+  // });
 </script>
 
 <section class="flex-1 flex items-center mb-4">
-  <div class="h-[600px] w-full bg-secondary rounded-xl shadow-xl"/>
+  <div class="h-[600px] w-full bg-secondary-500 rounded-xl shadow-xl overflow-hidden" >
+    <Image imagePath={data.meta.imagePath} placeholder="baba.jpg" alt={data.meta.title}/>
+  </div>
 </section>
 <section class="xl:ml-auto flex-col">
   <h1 class="pb-3">{data.meta.title}</h1>
   <section class="flex flex-col gap-1 pb-3">
-    <p class="py-0.5 px-2 bg-primary rounded-xl w-fit">{category}</p>
+    <p class="py-0.5 px-2 bg-primary-500 rounded-xl w-fit">{category}</p>
     <div class="flex gap-1">
       <Tag/>
-      {#each data.meta.tags.slice(0, 3) as tag}
-        <p class="py-0.5 px-2 bg-accent rounded-xl">{tag.name}</p>
-      {/each}
-      {#if data.meta.tags.slice(3).length > 0}
-      <p
-        class="py-0.5 px-2 bg-accent rounded-xl"
-        use:melt={$trigger}
-      >
-        + {data.meta.tags.slice(3).length} more
-      </p>
-      {#if $open}
-        <div
-          use:melt={$content}
-          transition:fade={{ duration: 100 }}
-          class="z-10 rounded-lg bg-secondary shadow px-4 py-1"
-        >
-          <div use:melt={$arrow} />
-          {#each data.meta.tags.slice(3) as tag}
-            <li>{tag.name}</li>
-          {/each}
-        </div>
-        {/if}
-      {/if}
+      <TagsView tags={data.meta.tags} maxNoOfTags={10}/>
     </div>
     <section class="flex gap-1">
       <Clock/>
@@ -92,14 +60,14 @@
     </section>
     <section class="flex gap-1">
       <Flame/>
-      {data.meta.calories ?? '-'}
+      {data.meta.calories ?? '-'} kcal
     </section>
   </section>
   
-  <section class="flex flex-col w-full gap-1 p-4 bg-secondary rounded-xl shadow-xl my-4">
+  <section class="flex flex-col w-full gap-1 p-4 bg-secondary-500 rounded-xl shadow-xl my-4">
     <h3 class="font-bold">Ingredients</h3>
-    <div class="w-full h-[1px] bg-text" use:melt={$horizontal}/>
-    <div class="flex flex-col flex-wrap gap-1 xl:max-h-[500px] overflow-x-scroll">
+    <div class="w-full h-[1px] bg-text-500" use:melt={$horizontal}/>
+    <div class="flex flex-col flex-wrap gap-1 xl:max-h-[400px] overflow-x-scroll">
       {#each data.meta.recipeIngredients as ingredient}
         <Ingredient description={ingredient.ingredient.name}/>
       {/each}

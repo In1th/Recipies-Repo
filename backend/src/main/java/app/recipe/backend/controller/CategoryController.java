@@ -10,7 +10,7 @@ import java.util.UUID;
 import app.recipe.backend.model.Category;
 import app.recipe.backend.service.interfaces.CategoryService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v0/category")
 public class CategoryController {

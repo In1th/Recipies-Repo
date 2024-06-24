@@ -1,4 +1,4 @@
-export function clickOutside(node) {
+export function clickOutside(node: HTMLElement) {
   
     const handleClick = event => {
       if (node && !node.contains(event.target) && !event.defaultPrevented) {

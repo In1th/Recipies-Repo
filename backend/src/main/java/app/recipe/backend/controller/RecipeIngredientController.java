@@ -9,7 +9,7 @@ import app.recipe.backend.service.interfaces.RecipeIngredientService;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v0/recipe-ingredients")
 public class RecipeIngredientController {

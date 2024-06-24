@@ -9,7 +9,7 @@ import java.util.UUID;
 import app.recipe.backend.model.Tag;
 import app.recipe.backend.service.interfaces.TagService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v0/tags")
 public class TagController {

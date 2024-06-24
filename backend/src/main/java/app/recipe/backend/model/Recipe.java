@@ -36,8 +36,12 @@ public class Recipe{
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Category category;
 
+	@Column(nullable = true)
 	private double time;
+
+	@Column(nullable = true)
 	private double calories;
+	
 	private String mdFilePath;
 	private String imagePath;
 	private float rate;

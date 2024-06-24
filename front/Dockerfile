@@ -1,8 +1,5 @@
 # Our Node base image
-FROM --platform=linux/amd64 node:20-alpine
-
-# Set the Node environment to development to ensure all packages are installed
-ENV NODE_ENV development
+FROM --platform=linux/amd64 node:20-alpine as builder
 
 # Change our current working directory
 WORKDIR /usr/src/front
@@ -17,7 +14,17 @@ COPY . .
 
 # Builds solution
 RUN npm run build
+RUN npm prune --prod
 
-EXPOSE 80
+FROM node:18.8.0-alpine AS deployer
 
-ENTRYPOINT [ "npm", "run", "preview" ]
+WORKDIR /usr/src/front
+
+COPY --from=builder /usr/src/front/build ./build
+COPY --from=builder /usr/src/front/package.json ./
+
+EXPOSE 3000
+
+ENV NODE_ENV=production
+
+ENTRYPOINT [ "node", "build" ]

@@ -8,7 +8,7 @@ import java.util.List;
 import app.recipe.backend.service.interfaces.SearchRecipeService;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v0/recipes/search")
 public class SearchRecipeController{

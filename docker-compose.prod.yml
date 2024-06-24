@@ -1,8 +1,10 @@
-name: recipes_dev
+version: '3.8'
+
+name: recipes
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: postgres_container_dev
+    container_name: postgres_container
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: postgres
@@ -14,7 +16,8 @@ services:
     restart: always
 
   backend:
-    container_name: backend_dev
+    container_name: backend
+    image: inith/recipe-app-backend:${REV_TAG}
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -30,20 +33,24 @@ services:
     restart: always
 
   frontend:
-    container_name: frontend_dev
+    container_name: frontend
+    image: inith/recipe-app-frontend:${REV_TAG}
+    restart: always
     build:
       context: ./front
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       no_cache: true
     ports:
-      - 3000:3000
-      - 3010:3010
+      - 80:3000
     depends_on:
       - backend
-    restart: always
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_SECRET: ${GOOGLE_SECRET}
+      AUTH_SECRET: ${AUTH_SECRET}
     volumes:
-      - ./front:/usr/src/front
       - /usr/src/front/node_modules
+      - /usr/src/from/.svelte-kit
       - ./resources/recipes:/var/resources/recipes
       - ./resources/images:/var/resources/images
 
@@ -59,4 +66,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./resources/recipes
+      device: ./resources

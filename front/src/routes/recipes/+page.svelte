@@ -1,38 +1,15 @@
-<script lang="ts">
-    import { searchHandler, searchStore } from "$lib/components/searchbar/search"
-    import { onDestroy } from "svelte";
+<script>
+    import RecipeHighlight from "$lib/components/recipe/RecipeHighlight.svelte";
 
-    export let data: any;
-
-    const searchRecipes = data.recipes.map((recipe: { title: any; tags: any }) => ({
-        ...recipe,
-        searchTerms: `${recipe.title} ${recipe.tags}`
-    }));
-
-    // Ustawienie danych w store
-    searchStore.set({
-        data: searchRecipes,
-        filtered: searchRecipes,
-        search: ""
-    });
-
-    const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
-
-    onDestroy(() => {
-        unsubscribe();
-    });
-
+    export let data;
 </script>
 
-<div class="flex flex-col">
-    <pre>{JSON.stringify($searchStore.filtered, null, 2)}</pre>
+<div class="flex justify-center">
+    <div class="grid grid-cols-3 gap-5">
+        {#each data.recipes as recipe}
+            <RecipeHighlight recipe={recipe}/>
+        {:else}
+            <p>No recipes</p>
+        {/each}
+    </div>
 </div>
-
-<style>
-    .recipe {
-        margin-bottom: 2em;
-    }
-    h2 {
-        margin-bottom: 0.5em;
-    }
-</style>

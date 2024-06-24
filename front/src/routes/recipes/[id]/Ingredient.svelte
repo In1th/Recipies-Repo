@@ -15,7 +15,7 @@
 <div>
     <button
         use:melt={$root}
-        class=" bg-background rounded-md shadow hover:opacity-75 size-5 flex items-center justify-center"
+        class=" bg-background-500 rounded-md shadow hover:opacity-75 size-5 flex items-center justify-center"
     >
         {#if $isChecked}
         <Check class="size-5" />

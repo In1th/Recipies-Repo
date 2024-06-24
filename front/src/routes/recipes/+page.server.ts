@@ -1,20 +1,18 @@
-import type { PageServerLoad } from "./$types";
+import { fail, type Load } from "@sveltejs/kit";
 
-export const load: PageServerLoad = async () => {
-    const getRecipes = async () => {
-        console.log("getting data !");
-        const res = await fetch("http://backend:8080/api/v0/recipes");
-        const data = await res.json();
+export const load: Load = async ({ url, fetch }) => {
+    const cat = url.searchParams.get('cat');
+    const res = await fetch('http://backend:8080/api/v0/recipes');
 
-        console.log("data json:");
-        console.log(data);
-
-        return data;
+    if (!res.ok) {
+        return fail(
+            res.status,
+            { message: res.statusText }
+        )
     }
-
-    const recipes = await getRecipes();
+    const data = await res.json();
 
     return {
-        recipes
-    };
-}
+        recipes: data
+    }
+};

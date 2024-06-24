@@ -1,22 +1,20 @@
-import { fail } from '@sveltejs/kit';
-import * as fs from 'fs/promises';
+import type { PageServerLoad } from "./$types";
 
-export async function load() {
+export const load: PageServerLoad = async () => {
+    const getRecipes = async () => {
+        console.log("getting data !");
+        const res = await fetch("http://backend:8080/api/v0/recipes");
+        const data = await res.json();
 
-    //K1: powinno sie pobrac wszystkie rekordy z przepisami z bazy jako json
+        console.log("data json:");
+        console.log(data);
 
-    try {
-        const dirPath = '/var/resources/recipes';
-        const files = await fs.readdir(dirPath);
-
-        const recipes = await Promise.all(files.map(async (file) => {
-            const content = await fs.readFile(`${dirPath}/${file}`, 'utf8');
-            return { file, content };
-        }));
-
-        return { recipes };
-    } catch (error) {
-        console.error(error);
-        return fail(500, { message: 'Could not load the recipes.' });
+        return data;
     }
+
+    const recipes = await getRecipes();
+
+    return {
+        recipes
+    };
 }

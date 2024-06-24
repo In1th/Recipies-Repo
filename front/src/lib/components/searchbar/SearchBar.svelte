@@ -6,6 +6,8 @@
     import { fly } from "svelte/transition";
     import { page } from "$app/stores";
 
+    export let searchStore;
+
     const {
         elements: { root, input, tag, deleteTrigger, edit },
         states: { tags },
@@ -87,7 +89,7 @@
         >
         <input
             use:melt={$input}
-            bind:value={searchText}
+            bind:value={$searchStore.search}
             on:click={onFocusIn}
             type="text"
             placeholder="Enter tags..."
@@ -152,10 +154,11 @@
     </div>
 {/if}
 
-<button class="flex gap-1 bg-white rounded-3xl items-center px-1">
+<!-- <button class="flex gap-1 bg-white rounded-3xl items-center px-1">
     <Search />
     <span>Search</span>
-</button>
+</button> -->
+
 
 <style>
     .blue {

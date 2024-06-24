@@ -1,27 +1,31 @@
 <script lang="ts">
-    import Showdown from 'showdown';
+    import { searchHandler, searchStore } from "$lib/components/searchbar/search"
+    import { onDestroy } from "svelte";
 
-    type Recipe = {
-        file: string;
-        content: string;
-    };
+    export let data: any;
 
-    export let data: { recipes: Recipe[] };
+    const searchRecipes = data.recipes.map((recipe: { title: any; tags: any }) => ({
+        ...recipe,
+        searchTerms: `${recipe.title} ${recipe.tags}`
+    }));
 
-    const converter = new Showdown.Converter();
+    // Ustawienie danych w store
+    searchStore.set({
+        data: searchRecipes,
+        filtered: searchRecipes,
+        search: ""
+    });
+
+    const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+
+    onDestroy(() => {
+        unsubscribe();
+    });
+
 </script>
 
 <div class="flex flex-col">
-    {#if data.recipes.length > 0}
-        {#each data.recipes as recipe}
-            <div class="recipe">
-                <h2>{recipe.file.replace('.md', '')}</h2>
-                <div>{@html converter.makeHtml(recipe.content)}</div>
-            </div>
-        {/each}
-    {:else}
-        <p>No recipes found.</p>
-    {/if}
+    <pre>{JSON.stringify($searchStore.filtered, null, 2)}</pre>
 </div>
 
 <style>

@@ -6,7 +6,6 @@
     import SearchCategories from '$lib/components/searchbar/SearchCategories.svelte';
     import './app.css';
 
-    export let data;
     const isNotInFrame = () => {
         try{
             return window.parent === window;
@@ -14,8 +13,6 @@
             return true;
         }
     }
-
-    console.log(data.session)
 </script>
 
 <svelte:head>

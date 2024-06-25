@@ -1,15 +1,35 @@
+<script context="module" lang="ts" >
+  type ToastData = {
+    title: string;
+    description: string;
+    color: string;
+  };
+
+  const {
+    elements: { content, title, description, close },
+    helpers,
+    states: { toasts },
+    actions: { portal }
+  } = createToaster<ToastData>();
+
+    export const addErrorToast = (title: string, description: string) => {
+      helpers.addToast({
+        data: {title, description, color: 'bg-red-500'}
+      })
+    }
+
+    export const addSuccessToast = (title: string, description: string) => {
+      helpers.addToast({
+        data: {title, description, color: 'bg-green-500'}
+      })
+    }
+</script>
+
 <script lang="ts">
-    import { melt } from "@melt-ui/svelte";
-    import { X } from "lucide-svelte";
-    import { flip } from "svelte/animate";
-    import { fly } from "svelte/transition";
-    import { toasterStore } from '$lib/stores';
-  
-    const {
-      elements: { content, title, description, close },
-      states: { toasts },
-      actions: { portal },
-    } = $toasterStore;
+  import { createToaster, melt } from "@melt-ui/svelte";
+  import { X } from "lucide-svelte";
+  import { flip } from "svelte/animate";
+  import { fly } from "svelte/transition";
 </script>
 
 <div

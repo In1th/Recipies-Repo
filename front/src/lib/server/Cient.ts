@@ -36,7 +36,6 @@ export class BackendClient {
             body: JSON.stringify(dto)
         });
         if (!res.ok){
-            console.log(recipe);
             throw Error(`response did not indicate success: ${res.status} (${res.statusText})`)
         }
     }

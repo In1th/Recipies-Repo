@@ -1,3 +1,4 @@
+import node_adapter from '@sveltejs/adapter-node';
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess'
 import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
@@ -13,7 +14,7 @@ const config = {
   	],
 
 	kit: {
-		adapter: adapter(),
+		adapter: process.env.NODE_ENV === 'production' ? node_adapter() : adapter(),
 	}
 };
 

@@ -5,6 +5,7 @@
     import { clickOutside } from "./clickOutside";
     import { fly } from "svelte/transition";
     import { searchStore } from '$lib/components/searchbar/search';
+    import { goto } from "$app/navigation";
 
     const {
         elements: { root, input, tag, deleteTrigger, edit },
@@ -73,6 +74,12 @@
         $tags = [];
         showTags = false;
     }
+
+    $: searchUrl = `/recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+    const search = () => {
+      console.log(searchUrl);
+      goto(searchUrl);
+    }
 </script>
 
 
@@ -104,7 +111,10 @@
                 </button>
             {/if}
         </div>
-        <button class="flex gap-1 bg-accent-500 hover:bg-accent-400 transition rounded-3xl items-center p-1">
+        <button
+            class="flex gap-1 bg-accent-500 hover:bg-accent-400 transition rounded-3xl items-center p-1"
+            on:click={search}
+        >
             <Search />
         </button>
     </div>

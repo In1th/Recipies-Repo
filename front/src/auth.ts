@@ -3,6 +3,15 @@ import  { SvelteKitAuth } from "@auth/sveltekit"
  
 export const { signIn, signOut, handle } = SvelteKitAuth({
   providers: [Auth0({
-    issuer: "https://dev-qoxpitnq3yeaai2x.us.auth0.com"
+    issuer: "https://dev-qoxpitnq3yeaai2x.us.auth0.com",
+    profile(profile) {
+      return {
+        name: profile.name,
+        email: profile.email,
+        image: profile.picture,
+        app_metadata: profile.app_metadata
+      };
+    },
   })],
+  trustHost: true
 })

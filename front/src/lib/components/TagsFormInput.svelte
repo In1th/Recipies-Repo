@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     import { editRecipeStore } from '$lib/stores';
     import { createTagsInput, melt, type Tag } from '@melt-ui/svelte';
     import { X } from 'lucide-svelte';

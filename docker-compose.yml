@@ -36,9 +36,9 @@ services:
       dockerfile: Dockerfile.dev
       no_cache: true
     environment:
-      AUTH_AUTH0_ID: ${AUTH_AUTH0_ID}
-      AUTH_AUTH0_SECRET: ${AUTH_AUTH0_SECRET}
-      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_AUTH0_ID: "w3Y1eBg3T0Cu48SRwlCYZ17KGRiexdxd"
+      AUTH_AUTH0_SECRET: "7SlW5VvVERHEJl98wgRlUVn2MBbncndd0LmIfpisoIqaIxW-ocVSkWdWBvRdISxs"
+      AUTH_SECRET: "somesecret"
     ports:
       - 3000:3000
       - 3010:3010

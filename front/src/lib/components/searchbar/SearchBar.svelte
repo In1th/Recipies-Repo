@@ -15,7 +15,7 @@
         editable: true,
         add(tag) {
             searchText = '';
-            
+
             if ($tags.find(t => t.id === tag.replace('-', ''))){
                 return Promise.reject();
             }
@@ -37,6 +37,7 @@
             }) as TagRow,
     );
 
+    export let searchStore;
     let searchText = '';
     let showTags = false;
     let suggestionsWrapper: unknown;
@@ -75,7 +76,7 @@
 </script>
 
 
-    
+
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
@@ -88,7 +89,7 @@
         <div class="relative flex-grow">
             <input
                 use:melt={$input}
-                bind:value={searchText}
+                bind:value={$searchStore.search}
                 on:click={onFocusIn}
                 type="text"
                 placeholder="Enter tags..."
@@ -107,7 +108,7 @@
             <Search />
         </button>
     </div>
-    
+
     <div class="flex flex-row w-full min-h-16 flex-wrap gap-2.5 rounded-md md:px-3 py-2">
         {#each $tags as t}
             <div
@@ -139,7 +140,7 @@
             />
         {/each}
     </div>
-    {#if showTags}            
+    {#if showTags}
         <div class="absolute w-full max-h-[250px] top-8 bg-white shadow-lg rounded-md flex flex-col gap-2 p-2 overflow-y-scroll z-[999]"
             id="tags-wrapper"
             bind:this={suggestionsWrapper}

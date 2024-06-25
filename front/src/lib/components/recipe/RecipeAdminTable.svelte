@@ -19,10 +19,10 @@
     const {states: {range}} = props;
 </script>
 
-<div class="grid grid-cols-6 border-b border-text-500 pt-3">
+<div class="grid grid-cols-6 border-b border-text-500 pt-3 px-2">
     <h2 class="col-span-3">Title</h2>
-    <h2>Rating</h2>
-    <h2>Comments</h2>
+    <h2 class="text-center">Rating</h2>
+    <h2 class="text-center">Comments</h2>
     <span/>
 </div>
 <div class="min-h-[480px]">

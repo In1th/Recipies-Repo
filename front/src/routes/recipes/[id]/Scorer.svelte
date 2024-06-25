@@ -1,0 +1,29 @@
+<script>
+    import { Star } from "lucide-svelte";
+    import {click_outside} from '$lib/components/searchbar/clickOutside'
+
+    let score = 0;
+    let hovered = 0
+</script>
+
+<section class="flex gap-1" on:click_outside={() => highlighted = 0}>
+    {#each [1,2,3,4,5] as idx}
+        <button on:click={() => score = idx} on:mouseover={() => hovered = idx}>
+            <svg 
+            class:rated={idx <= score}
+            class:highlighted={idx <= hovered}
+            class="lucide lucide-star hover:fill-primary-500/50 transition"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </button>
+    {/each}
+</section>
+
+<style lang="postcss">
+    .rated {
+        @apply fill-primary-500 !important;
+    }
+
+    .highlighted {
+        @apply fill-primary-500/50;
+    }
+</style>

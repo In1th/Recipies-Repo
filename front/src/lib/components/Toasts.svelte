@@ -23,6 +23,12 @@
         data: {title, description, color: 'bg-green-500'}
       })
     }
+
+    export const addWarminngToast = (title: string, description: string) => {
+      helpers.addToast({
+        data: {title, description, color: 'bg-orange-500'}
+      })
+    }
 </script>
 
 <script lang="ts">

@@ -6,6 +6,7 @@ export const { signIn, signOut, handle } = SvelteKitAuth({
     issuer: "https://dev-qoxpitnq3yeaai2x.us.auth0.com",
     profile(profile) {
       return {
+        id: profile.user_id,
         name: profile.name,
         email: profile.email,
         image: profile.picture,

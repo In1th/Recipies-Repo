@@ -3,6 +3,7 @@ import type { LayoutServerLoad } from "./$types"
 import { fail } from "@sveltejs/kit";
 
 export const load: LayoutServerLoad = async ({ fetch, locals }) => {
+    console.log("getting data Layout !");
     const res = await fetch('http://backend:8080/api/v0/recipes');
 
     if (!res.ok) {

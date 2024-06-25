@@ -4,6 +4,7 @@
     import { faker } from '@faker-js/faker';
     import { clickOutside } from "./clickOutside";
     import { fly } from "svelte/transition";
+    import { searchStore } from '$lib/components/searchbar/search';
 
     const {
         elements: { root, input, tag, deleteTrigger, edit },
@@ -37,7 +38,6 @@
             }) as TagRow,
     );
 
-    export let searchStore;
     let searchText = '';
     let showTags = false;
     let suggestionsWrapper: unknown;

@@ -5,17 +5,8 @@
     import SearchBar from '$lib/components/searchbar/SearchBar.svelte';
     import SearchCategories from '$lib/components/searchbar/SearchCategories.svelte';
     import './app.css';
-    import { searchHandler, searchStore } from '$lib/components/searchbar/search';
-    import { onDestroy } from 'svelte';
-
-    const unsubscribe = searchStore.subscribe((model) => searchHandler(model, model.search));
-
-    onDestroy(() => {
-        unsubscribe();
-    });
 
     export let data;
-
     const isNotInFrame = () => {
         try{
             return window.parent === window;
@@ -37,7 +28,7 @@
 <section class="flex flex-col items-center mx-2 sm:mx-auto max-w-[1280px]">
     {#if !$page.url.href.includes('/admin') && !$page.url.href.includes('/login')}
         <SearchCategories categories={['Dinner', 'Dessert', 'Soups']}/>
-        <SearchBar {searchStore} />
+        <SearchBar />
     {/if}
     <section class="w-full">
         <slot/>

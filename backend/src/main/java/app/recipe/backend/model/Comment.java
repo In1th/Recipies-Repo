@@ -1,5 +1,6 @@
 package app.recipe.backend.model;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -25,4 +26,6 @@ public class Comment {
     private UUID idRecipe;
     @Column(nullable = false)
     private String content;
+    @Column(nullable = false)
+    private LocalDate createdDate;
 }

@@ -13,7 +13,12 @@ export default defineConfig({
 			usePolling: true
 		},
 		proxy: {
-			'/p6': 'http://localhost:80'
+			'/p6': {
+				target: 'http://localhost:80',
+				rewrite(path) {
+					return path.replace(/^\/p6/, '');
+				},
+			}
 		}
 	},
 	preview: {

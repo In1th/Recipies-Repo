@@ -11,6 +11,9 @@ export default defineConfig({
 		},
 		watch: {
 			usePolling: true
+		},
+		proxy: {
+			'/p6': 'http://localhost:80'
 		}
 	},
 	preview: {

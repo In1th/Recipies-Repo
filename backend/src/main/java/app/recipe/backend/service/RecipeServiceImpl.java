@@ -1,25 +1,21 @@
 package app.recipe.backend.service;
 
-import app.recipe.backend.model.Recipe;
-import app.recipe.backend.repository.CategoryRepository;
-import app.recipe.backend.repository.RecipeRepository;
-import app.recipe.backend.service.interfaces.RecipeService;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import app.recipe.backend.model.Recipe;
+import app.recipe.backend.repository.RecipeRepository;
+import app.recipe.backend.service.interfaces.RecipeService;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
 	private RecipeRepository recipeRepository;
-
-	@Autowired
-	private CategoryRepository categoryRepository;
 
 	@Override
 	public Recipe add(Recipe recipe) {

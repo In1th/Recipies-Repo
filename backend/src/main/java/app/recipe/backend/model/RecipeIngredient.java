@@ -23,7 +23,7 @@ public class RecipeIngredient {
 //	@JoinColumn(name = "recipe_uuid", nullable = false)
 //	private Recipe recipe;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Ingredient ingredient;
 
 	private String quantity;

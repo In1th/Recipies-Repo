@@ -2,7 +2,7 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    #url: jdbc:postgresql://localhost:5432/recipes
+    # url: jdbc:postgresql://localhost:5432/recipes
     url: jdbc:postgresql://postgres:5432/recipes
     username: postgres
     password: root

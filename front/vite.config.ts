@@ -4,7 +4,7 @@ import proxy from './src/proxy';
 
 export default defineConfig({
 	server: {
-		port: 3000,
+		port: 80,
 		host: true,
 		strictPort: true,
 		hmr: {

@@ -1,3 +1,3 @@
-import { signOut } from "../../auth"
-import type { Actions } from "./$types"
+import type { Actions } from "@sveltejs/kit"
+import { signOut } from "../../../auth"
 export const actions: Actions = { default: signOut }

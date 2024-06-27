@@ -16,6 +16,8 @@ RUN npm install
 # Copy over rest of the project files
 COPY . .
 
+RUN npm run build
+
 EXPOSE 3000 3010
 
-ENTRYPOINT [ "npm", "run", "dev"]
+ENTRYPOINT [ "npm", "preview"]

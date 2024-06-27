@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import proxy from './src/proxy';
 
 export default defineConfig({
 	server: {
@@ -14,7 +15,7 @@ export default defineConfig({
 		},
 		proxy: {
 			'/p6': {
-				target: 'http://localhost:80',
+				target: 'http://localhost:3000',
 				rewrite(path) {
 					return path.replace(/^\/p6/, '');
 				},
@@ -24,7 +25,7 @@ export default defineConfig({
 	preview: {
 		port: 80
 	},
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), proxy],
 	// optimizeDeps: {
 	// 	exclude: ['fs', 'node:fs']
 	// },

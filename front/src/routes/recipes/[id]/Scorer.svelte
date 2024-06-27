@@ -1,12 +1,11 @@
 <script>
     import { Star } from "lucide-svelte";
-    import {click_outside} from '$lib/components/searchbar/clickOutside'
 
     let score = 0;
     let hovered = 0
 </script>
 
-<section class="flex gap-1" on:click_outside={() => highlighted = 0}>
+<section class="flex gap-1" >
     {#each [1,2,3,4,5] as idx}
         <button on:click={() => score = idx} on:mouseover={() => hovered = idx}>
             <svg 

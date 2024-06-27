@@ -14,5 +14,5 @@ export const { signIn, signOut, handle } = SvelteKitAuth({
       };
     },
   })],
-  trustHost: true
+  trustHost: true,
 })

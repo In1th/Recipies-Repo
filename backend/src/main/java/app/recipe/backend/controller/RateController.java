@@ -50,8 +50,8 @@ public class RateController {
     }
 
     @GetMapping("/recipe/{id}")
-    public ResponseEntity<List<Rate>> getByRecipe(@PathVariable UUID idRecipe) {
-        List<Rate> rates = rateService.findByRecipe(idRecipe);
+    public ResponseEntity<List<Rate>> getByRecipe(@PathVariable UUID id) {
+        List<Rate> rates = rateService.findByRecipe(id);
         if (rates != null && !rates.isEmpty()) {
             return new ResponseEntity<>(rates, HttpStatus.OK);
         } else {

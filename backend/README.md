@@ -5,6 +5,18 @@
 - mvn
 - docker
 
+# Swagger
+
+```json
+http://localhost:8080/swagger-ui/index.html#
+```
+
+# API docs
+
+```json
+http://localhost:8080/v3/api-docs
+```
+
 # Usage DEV
 
 pull image

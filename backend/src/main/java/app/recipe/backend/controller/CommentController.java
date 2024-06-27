@@ -50,8 +50,8 @@ public class CommentController {
     }
 
     @GetMapping("/recipe/{id}")
-    public ResponseEntity<List<Comment>> getByRecipe(@PathVariable UUID idRecipe) {
-        List<Comment> comments = commentService.findByRecipe(idRecipe);
+    public ResponseEntity<List<Comment>> getByRecipe(@PathVariable UUID id) {
+        List<Comment> comments = commentService.findByRecipe(id);
         if (comments != null && !comments.isEmpty()) {
             return new ResponseEntity<>(comments, HttpStatus.OK);
         } else {

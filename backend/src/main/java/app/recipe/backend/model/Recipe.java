@@ -47,7 +47,7 @@ public class Recipe{
 	private Category category;
 
 	@Column(nullable = true)
-	private double preparationTime;
+	private String preparationTime;
 
 	@Column(nullable = true)
 	private double calories;

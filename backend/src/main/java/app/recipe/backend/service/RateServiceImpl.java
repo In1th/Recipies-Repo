@@ -62,4 +62,18 @@ public class RateServiceImpl implements RateService {
         }
         return rates;
     }
+
+    @Override
+    public float getAvgByRecipe(UUID id) {
+        List<Rate> ratings = rateRepository.findByIdRecipe(id);
+        if (ratings.isEmpty()) {
+            throw new IllegalArgumentException("Recipe not found for id: " + id);
+        }
+
+        float sum = 0;
+        for (Rate rate : ratings) {
+            sum += rate.getRate();
+        }
+        return sum / ratings.size();
+    }
 }

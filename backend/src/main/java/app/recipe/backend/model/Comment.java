@@ -27,6 +27,8 @@ public class Comment {
     @Column(nullable = false, updatable = false)
     private UUID idRecipe;
     @Column(nullable = false)
+    private String user;
+    @Column(nullable = false)
     private String content;
     @Column(nullable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")

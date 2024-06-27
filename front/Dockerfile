@@ -18,12 +18,12 @@ ENV NODE_ENV=production
 RUN npm run build
 RUN npm prune --prod
 
-# FROM node:18.8.0-alpine AS deployer
+FROM node:18.8.0-alpine AS deployer
 
-# WORKDIR /usr/src/front
+WORKDIR /usr/src/front
 
-# COPY --from=builder /usr/src/front/build ./build
-# COPY --from=builder /usr/src/front/package.json .
+COPY --from=builder /usr/src/front/build ./build
+COPY --from=builder /usr/src/front/package.json .
 
 EXPOSE 80
 

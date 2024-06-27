@@ -50,6 +50,7 @@ services:
       ORIGIN: ${ORIGIN}
       AUTH_SECRET: ${AUTH_SECRET}
     volumes:
+      - /usr/src/front/node_modules
       - ./resources/recipes:/var/resources/recipes
       - ./resources/images:/var/resources/images
 

@@ -14,5 +14,6 @@ export const { signIn, signOut, handle } = SvelteKitAuth({
       };
     },
   })],
-  trustHost: true
+  trustHost: true,
+  redirectProxyUrl: 'http://149.156.43.57/p6'
 })

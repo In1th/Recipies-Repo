@@ -7,4 +7,5 @@ import app.recipe.backend.model.Rate;
 
 public interface RateService extends BaseService<Rate> { 
 	List<Rate> findByRecipe(final UUID id);
+	float getAvgByRecipe(final UUID id);
 }

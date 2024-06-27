@@ -59,6 +59,16 @@ public class RateController {
         }
     }
 
+    @GetMapping("/recipe/avg/{id}")
+    public ResponseEntity<Float> getAvgByRecipe(@PathVariable UUID id) {
+        float avgdRate = rateService.getAvgByRecipe(id);
+        if (avgdRate != 0.0) {
+            return new ResponseEntity<>(avgdRate, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Rate> update(@PathVariable UUID id, @RequestBody Rate rate) {
         rate.setId(id);

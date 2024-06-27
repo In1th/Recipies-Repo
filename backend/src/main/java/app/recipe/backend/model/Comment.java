@@ -26,6 +26,8 @@ public class Comment {
     private UUID id;
     @Column(nullable = false, updatable = false)
     private UUID idRecipe;
+    @Column(nullable = true)
+    private String user;
     @Column(nullable = false)
     private String content;
     @Column(nullable = false)

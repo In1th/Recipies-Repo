@@ -1,17 +1,20 @@
+<script context="module" lang="ts">
+  const {
+      elements: { trigger, portalled, overlay, content, title, description },
+      states: { open }
+    } = createDialog({
+        forceVisible: true,
+    });
+
+    export const deleteDialogTrigger = trigger;
+</script>
+
 <script lang="ts">
     import { enhance } from '$app/forms';
-    import type { DialogType } from '$lib/types';
-    import { melt } from '@melt-ui/svelte'
+    import { createDialog, melt } from '@melt-ui/svelte'
     import { fade } from 'svelte/transition';
 
     export let recipeId: string;
-
-    export let props: DialogType;
-
-    const {
-      elements: { portalled, overlay, content, title, description },
-      states: { open }
-    } = props;
 
     const close = () => {
         $open = false;

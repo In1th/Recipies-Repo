@@ -4,6 +4,9 @@
   import { Clock, Flame, Tag } from 'lucide-svelte';
   import Image from '$lib/components/Image.svelte';
     import TagsView from '$lib/components/TagsView.svelte';
+    import FakeRate from '$lib/components/FakeRate.svelte';
+    import Comments from './Comments.svelte';
+    import Scorer from './Scorer.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -50,6 +53,10 @@
   <h1 class="pb-3">{data.meta.title}</h1>
   <section class="flex flex-col gap-1 pb-3">
     <p class="py-0.5 px-2 bg-primary-500 rounded-xl w-fit">{category}</p>
+    <div class="flex gap-3">
+      <FakeRate/>
+      <Scorer/>
+    </div>
     <div class="flex gap-1">
       <Tag/>
       <TagsView tags={data.meta.tags} maxNoOfTags={10}/>
@@ -91,3 +98,5 @@
 <section class="markdown mb-4">
   {@html data.content}
 </section>
+
+<Comments/>

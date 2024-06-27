@@ -1,34 +1,54 @@
-import { writable } from "svelte/store"
+import { writable } from "svelte/store";
+import type { Recipe } from "$lib/models/RecipeDto";
 
-export interface SearchStoreModel<T extends Record<PropertyKey, any>> {
-	data: T[]
-	filtered: T[]
-	search: string
+export interface SearchRecipe extends Recipe {
+    searchTerms: string;
 }
 
-export const createSearchStore = <T extends Record<PropertyKey, any>>(
-	data: T[],
-) => {
-	const { subscribe, set, update } = writable<SearchStoreModel<T>>({
-		data: data,
-		filtered: data,
-		search: "",
-	})
-
-	return {
-		subscribe,
-		set,
-		update,
-	}
+export interface SearchStore {
+    data: SearchRecipe[];
+    filtered: SearchRecipe[];
+    search: string;
 }
 
-export const searchHandler = <T extends Record<PropertyKey, any>>(
-	store: SearchStoreModel<T>,
-) => {
-	const searchTerm = store.search.toLowerCase() || ""
-	store.filtered = store.data.filter((item) => {
-		return item.searchTerms.toLowerCase().includes(searchTerm)
-	})
-}
+export const createSearchStore = (data: SearchRecipe[]) => {
+    const { subscribe, set, update } = writable<SearchStore>({
+        data: data,
+        filtered: data,
+        search: "",
+    });
+
+    return {
+        subscribe,
+        set,
+        update,
+        setSearch: (search: string) => update(store => {
+            store.search = search;
+            store.filtered = store.data.filter(item => {
+                const searchTerms = item.searchTerms || "";
+                return searchTerms.toLowerCase().includes(search.toLowerCase());
+            });
+            return store;
+        })
+    };
+};
+
+export const searchHandler = (store: SearchStore, search: string) => {
+    store.search = search;
+    store.filtered = store.data.filter(item => {
+        const searchTerms = item.searchTerms || "";
+        return searchTerms.toLowerCase().includes(search.toLowerCase());
+    });
+};
+
+export const searchTermsRecipe = (data: Recipe[]): SearchRecipe[] => {
+    return data.map((recipe) => {
+        const searchTerms = `${recipe.title} ${recipe.tags.map(tag => tag.name).join(' ')}`;
+        return {
+            ...recipe,
+            searchTerms
+        };
+    });
+};
 
 export const searchStore = createSearchStore([]);

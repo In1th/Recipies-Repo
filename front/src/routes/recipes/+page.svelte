@@ -1,15 +1,23 @@
 <script>
-    import RecipeHighlight from "$lib/components/recipe/RecipeHighlight.svelte";
+    import RecipeGrid from "$lib/components/recipe/RecipeGrid.svelte";
+    import { searchHandler, searchStore, searchTermsRecipe } from "$lib/components/searchbar/search"
+    import { onDestroy } from "svelte";
 
     export let data;
+    const searchRecipes = searchTermsRecipe(data.recipes);
+    searchStore.set({
+        data: searchRecipes,
+        filtered: searchRecipes,
+        search: ""
+    });
+
+    const unsubscribe = searchStore.subscribe((model) => searchHandler(model, model.search));
+
+    onDestroy(() => {
+        unsubscribe();
+    });
 </script>
 
-<div class="flex justify-center">
-    <div class="grid grid-cols-3 gap-5">
-        {#each data.recipes as recipe}
-            <RecipeHighlight recipe={recipe}/>
-        {:else}
-            <p>No recipes</p>
-        {/each}
-    </div>
-</div>
+<section class="flex flex-col justify-center items-center">
+    <RecipeGrid recipes={data.recipes}/>
+</section>

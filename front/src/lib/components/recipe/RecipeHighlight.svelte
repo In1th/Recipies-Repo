@@ -1,8 +1,10 @@
 <script lang="ts">
     import type { Recipe } from "$lib/models";
-    import { Clock, Flame } from "lucide-svelte";
+    import { Clock, Flame, Star } from "lucide-svelte";
     import Image from "../Image.svelte";
     import TagsView from "../TagsView.svelte";
+    import { faker } from "@faker-js/faker";
+    import FakeRate from "../FakeRate.svelte";
 
     export let recipe: Recipe;
 </script>
@@ -14,7 +16,11 @@
     <Image styles="z-0 absolute object-cover" imagePath={recipe.imagePath} placeholder="baba.jpg" alt={recipe.title}/>
     <div class="z-20 mt-auto bg-white/70 w-full flex flex-col gap-1 items-center p-2 h-[200px]">
         <h2>{recipe.title}</h2>
-        <p>{recipe.category.name || 'No category'}</p>
+        <div class="flex gap-2">
+            <FakeRate/>
+            •
+            <p>{recipe.category.name || 'No category'}</p>
+        </div>
         <section class="mt-auto flex gap-1 flex-wrap justify-center">
             <TagsView tags={recipe.tags}/>
         </section>

@@ -6,21 +6,14 @@
     import { editRecipeStore } from "$lib/stores/editRecipeStore";
     import { Plus } from "lucide-svelte";
     import type { ActionData } from "./$types.js";
-    import { addErrorToast, addSuccessToast } from "$lib/stores/toasterStore.js";
     import type { Recipe } from "$lib/models/RecipeDto.js";
     import { createDialog } from "@melt-ui/svelte";
     import RecipeAdminTable from "$lib/components/recipe/RecipeAdminTable.svelte";
+    import { addSuccessToast, addErrorToast } from "$lib/components";
 
     export let data;
 
 	export let form: ActionData;
-    
-    // onMount(() => {
-    //     if (!data.session){
-    //         goto('/');
-    //         return;
-    //     }
-    // })
 
     const onNew = () => {
         $editRecipeStore = undefined;
@@ -57,9 +50,6 @@
 
     $: filtered = data.recipes.filter((r: Recipe) => r.title.toLowerCase().includes(searchVal.toLowerCase()));
 
-    const props = createDialog({
-        forceVisible: true,
-    });
 </script>
 
 <section class="flex w-full">
@@ -70,8 +60,8 @@
                 <Plus/>
             </button>
         </div>
-        <RecipeAdminTable recipes={filtered} searchVal={searchVal} setOpen={setOpen} trigger={props.elements.trigger}/>
-        <DeleteDialog recipeId={uuid} props={props}/>
+        <RecipeAdminTable recipes={filtered} searchVal={searchVal} setOpen={setOpen} />
+        <DeleteDialog recipeId={uuid}/>
     </section>
     <section class="flex flex-col items-center">
         <RecipeForm categories={data.categories}/>

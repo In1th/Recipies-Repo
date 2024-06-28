@@ -14,6 +14,9 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
     }
     const data = await res.json();
 
+    const categoriesSet = new Set(data.map((recipe: Recipe) => recipe.category.name));
+    const cats = Array.from(categoriesSet);
+
     const tagCounts: TagCount = data.reduce((acc: TagCount, recipe: Recipe) => {
         if (recipe.tags && Array.isArray(recipe.tags)) {
             recipe.tags.forEach(tag => {
@@ -32,6 +35,7 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
     return {
         recipes: data,
         tags: arrTags,
+        categories: cats,
         session: await locals.auth()
     }
 };

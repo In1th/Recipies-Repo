@@ -25,7 +25,7 @@
 <Navbar/>
 <section class="flex flex-col items-center mx-2 sm:mx-auto max-w-[1280px]">
     {#if !$page.url.href.includes('/admin') && !$page.url.href.includes('/login')}
-        <SearchCategories categories={['Dinner', 'Dessert', 'Soups']}/>
+        <SearchCategories categories={data.categories}/>
         <SearchBar data={data} />
     {/if}
     <section class="w-full">

@@ -21,7 +21,7 @@ export type Ingredient = {
     quantity: string
 }
 
-export type BaseRecipeFormData = { 
+export type BaseRecipeFormData = {
     title: string,
     category: string
     ingredients: string,
@@ -31,7 +31,7 @@ export type BaseRecipeFormData = {
 }
 
 export type NewRecipeFormData = BaseRecipeFormData & {
-    file: File, 
+    file: File,
     image: File
 }
 
@@ -40,3 +40,12 @@ export type UpdateRecipeFormData = BaseRecipeFormData & {
     mdFilePath: string,
     imagePath: string
 }
+
+export type TagRow = {
+    name: string;
+    count: number;
+};
+
+export type TagCount = {
+    [key: string]: TagRow;
+};

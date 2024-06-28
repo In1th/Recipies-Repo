@@ -6,6 +6,7 @@
     import SearchCategories from '$lib/components/searchbar/SearchCategories.svelte';
     import './app.css';
 
+    export let data;
     const isNotInFrame = () => {
         try{
             return window.parent === window;
@@ -25,7 +26,7 @@
 <section class="flex flex-col items-center mx-2 sm:mx-auto max-w-[1280px]">
     {#if !$page.url.href.includes('/admin') && !$page.url.href.includes('/login')}
         <SearchCategories categories={['Dinner', 'Dessert', 'Soups']}/>
-        <SearchBar />
+        <SearchBar data={data} />
     {/if}
     <section class="w-full">
         <slot/>

@@ -1,12 +1,13 @@
 <script lang="ts">
     import { createTagsInput, melt } from "@melt-ui/svelte";
     import { X, Search } from "lucide-svelte";
-    import { faker } from '@faker-js/faker';
     import { clickOutside } from "./clickOutside";
     import { fly } from "svelte/transition";
     import { searchStore } from '$lib/components/searchbar/search';
     import { goto } from "$app/navigation";
+    import type { TagRow } from "$lib/models"
 
+    export let data;
     const {
         elements: { root, input, tag, deleteTrigger, edit },
         states: { tags },
@@ -26,29 +27,16 @@
         },
     });
 
-    type TagRow = {
-        name: string;
-        count: number;
-    };
-
-    const arrTags = Array.from({ length: 20 }, (_, index) => index).map(
-        (_) =>
-            ({
-                name: faker.commerce.productName().split(" ")[0],
-                count: faker.number.int(20),
-            }) as TagRow,
-    );
-
     let searchText = '';
     let showTags = false;
     let suggestionsWrapper: unknown;
 
     $: filtered = searchText
-        ? arrTags.filter(({ name }) => {
+        ? data.tags.filter((tag: TagRow) => {
               const normalizedInput = searchText.replace('-', '').toLowerCase();
-              return name.toLowerCase().includes(normalizedInput);
+              return tag.name.toLowerCase().includes(normalizedInput);
           })
-        : arrTags;
+        : data.tags;
 
     const addNewTag = async (t: string) => {
         await addTag(t);

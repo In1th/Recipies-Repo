@@ -13,8 +13,6 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
         )
     }
     const data = await res.json();
-    //console.log("Recipes:");
-    //console.log(JSON.stringify(data, null, 2));
 
     const tagCounts: TagCount = data.reduce((acc: TagCount, recipe: Recipe) => {
         if (recipe.tags && Array.isArray(recipe.tags)) {
@@ -30,8 +28,6 @@ export const load: LayoutServerLoad = async ({ fetch, locals }) => {
     }, {});
 
     const arrTags: TagRow[] = Object.values(tagCounts);
-
-    //console.log("Tags with counts:", JSON.stringify(arrTags, null, 2));
 
     return {
         recipes: data,

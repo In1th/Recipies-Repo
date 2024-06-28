@@ -63,11 +63,35 @@
         showTags = false;
     }
 
-    $: searchUrl = `/recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+    //$: searchUrl = `/recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+    // const search = () => {
+    //   console.log(searchUrl);
+    //   goto(searchUrl);
+    // }
+
     const search = () => {
-      console.log(searchUrl);
-      goto(searchUrl);
+        const selectedTags = $tags.map(t => t.value).join(',');
+        const searchUrl = `/recipes?tags=${encodeURIComponent(selectedTags)}`;
+        goto(searchUrl);
     }
+
+   // $: searchUrl = `/${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+    // const search = () => {
+    //     console.log("search click :)");
+    //     console.log($tags);
+    //     const selectedTags = $tags.map(t => t.value);
+    //     searchStore.update(store => {
+    //         store.search = searchText;
+    //         store.filtered = store.data.filter(item => {
+    //             const searchTerms = item.searchTerms || "";
+    //             const tagMatches = selectedTags.every(tag => searchTerms.toLowerCase().includes(tag.toLowerCase()));
+    //             return tagMatches;
+    //         });
+    //         console.log(JSON.stringify(store.filtered));
+    //         return store;
+    //     });
+    //     showTags = false;
+    // }
 </script>
 
 

@@ -64,9 +64,9 @@
     }
 
    $: searchUrl = `/recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
-    const search = () => {
+    const search = async () => {
         const selectedTags = $tags.map(t => t.value);
-        goto(searchUrl);
+        await goto(searchUrl);
         $searchStore.filtered = $searchStore.data.filter(recipe => selectedTags.some(tag => recipe.tags.some(t => t.name.toLowerCase() === tag.toLowerCase())))
         showTags = false;
     }

@@ -26,13 +26,13 @@
 
 <nav class="w-screen h-10 flex items-center justify-between shadow-lg mb-2 p-6">
     <section use:melt={$menubar} class="w-full flex gap-2 md:gap-8 items-center">
-        <a href='./' class="flex">
+        <a href='/p6' class="flex">
             <ChefHat />
             <b class=" hidden sm:block">Gotuje</b>
         </a>
 
         {#if $page.data.session}
-            <a class="desktop" href="./admin">Dashboard</a>
+            <a class="desktop" href="/p6/admin">Dashboard</a>
         {/if}
         <div class="ml-auto">
             <SignIn/>
@@ -50,7 +50,7 @@
             class="bg-background-500 flex flex-col gap-0.5 p-2 rounded-md shadow-xl md:hidden"
             use:melt={$menuBurger}
         >
-            <a href="./admin">Dashboard</a>
+            <a href="/p6/admin">Dashboard</a>
             <div class="w-full h-[1px] bg-text-500" use:melt={$sepBurger}/>
             <SignIn/>
         </div>

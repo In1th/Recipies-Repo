@@ -69,7 +69,7 @@ export const actions: Actions = {
 export const load: ServerLoad = async ({fetch, locals}) => {
     const auth = await locals.auth();
     if (!auth) {
-        throw redirect(303, '/p6');
+        throw redirect(303, '/');
     }
 
     const resCats = await fetch('http://backend:8080/api/v0/category');

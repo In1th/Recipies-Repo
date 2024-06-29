@@ -1,12 +1,15 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import DeleteDialog from "$lib/components/DeleteDialog.svelte";
+    import RecipeAdminRecord from "$lib/components/recipe/RecipeAdminRecord.svelte";
     import RecipeForm from "$lib/components/recipe/RecipeForm.svelte";
     import { editRecipeStore } from "$lib/stores/editRecipeStore";
     import { Plus } from "lucide-svelte";
+    import type { ActionData } from "./$types.js";
     import type { Recipe } from "$lib/models/RecipeDto.js";
+    import { createDialog } from "@melt-ui/svelte";
     import RecipeAdminTable from "$lib/components/recipe/RecipeAdminTable.svelte";
     import { addSuccessToast, addErrorToast } from "$lib/components";
-    import type { ActionData } from "../../signin/$types.js";
 
     export let data;
 

@@ -17,7 +17,7 @@ services:
 
   backend:
     container_name: backend
-    image: inith/recipe-app-backend:${REV_TAG}
+    image: inith/recipe-app-backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -34,7 +34,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: inith/recipe-app-frontend:${REV_TAG}
+    image: inith/recipe-app-frontend
     restart: always
     build:
       context: ./front

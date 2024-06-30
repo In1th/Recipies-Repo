@@ -2,7 +2,7 @@ export type RecipeDto = {
     title: string,
     mdFilePath: string,
     imagePath: string,
-    // preparationTime: string,
+    preparationTime: string,
     calories: number,
     category: Category,
     recipeIngredients: Ingredient[],

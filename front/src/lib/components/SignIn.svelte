@@ -7,7 +7,7 @@
     const signOut = async () => {
         try{
             await authSignOut();
-            addSuccessToast('Signed Out', 'You have been signed out of your account');
+            // addSuccessToast('Signed Out', 'You have been signed out of your account');
         } catch(e) {
             console.log(e)
             addErrorToast('Operation failed', 'The issue has been reported and our team will investigate it.')
@@ -17,7 +17,7 @@
     const signIn = async () => {
         try{
             await authSignIn('auth0');
-            addSuccessToast('Signed In', 'You have been signed in!');
+            // addSuccessToast('Signed In', 'You have been signed in!');
         } catch(e) {
             console.log(e)
             addErrorToast('Operation failed', 'The issue has been reported and our team will investigate it.')

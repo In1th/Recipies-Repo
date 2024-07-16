@@ -16,7 +16,7 @@ const config = {
 	kit: {
 		adapter: process.env.NODE_ENV === 'production' ? node_adapter() : adapter(),
 		paths: {
-			base: '/p6',
+			// base: '/p6',
 		}
 	}
 };

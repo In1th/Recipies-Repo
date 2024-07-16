@@ -28,6 +28,5 @@ RUN npm prune --prod
 EXPOSE 80
 
 ENV PORT=80
-ENV ORIGIN=http://localhost
 
 ENTRYPOINT [ "node", "build", "--name", "recipe-app", "--port", "80" ]

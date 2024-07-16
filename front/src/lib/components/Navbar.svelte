@@ -50,7 +50,7 @@
             class="bg-background-500 flex flex-col gap-0.5 p-2 rounded-md shadow-xl md:hidden"
             use:melt={$menuBurger}
         >
-            <a href="./admin">Dashboard</a>
+            <a href="/p6/admin">Dashboard</a>
             <div class="w-full h-[1px] bg-text-500" use:melt={$sepBurger}/>
             <SignIn/>
         </div>

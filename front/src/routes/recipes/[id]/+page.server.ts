@@ -2,7 +2,7 @@ import { error, type Load } from '@sveltejs/kit';
 
 export const load: Load = async ({ params, fetch }) => {
   try{
-    const res = await fetch(`./blob/recipe/${params.id}`);  
+    const res = await fetch(`/p6/blob/recipe/${params.id}`);  
     
     const { page, metadata } = await res.json();
     return {

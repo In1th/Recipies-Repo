@@ -17,7 +17,6 @@ const config = {
 		adapter: process.env.NODE_ENV === 'production' ? node_adapter() : adapter(),
 		paths: {
 			base: '/p6',
-			relative: false
 		}
 	}
 };

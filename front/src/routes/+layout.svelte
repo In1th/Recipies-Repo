@@ -7,13 +7,7 @@
     import './app.css';
 
     export let data;
-    const isNotInFrame = () => {
-        try{
-            return window.parent === window;
-        } catch (e) {
-            return true;
-        }
-    }
+    const isNotInFrame = () => true
 </script>
 
 <svelte:head>

@@ -50,6 +50,7 @@ services:
       ORIGIN: ${ORIGIN}
       AUTH_SECRET: ${AUTH_SECRET}
     volumes:
+      - ./front/build:/var/resources/recipes/build
       - ./resources/recipes:/var/resources/recipes
       - ./resources/images:/var/resources/images
 

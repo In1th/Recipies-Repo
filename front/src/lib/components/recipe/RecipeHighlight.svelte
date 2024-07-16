@@ -11,7 +11,7 @@
 
 <a
     class="relative flex flex-col gap-2 items-center shadow-lg rounded-2xl bg-primary-500 overflow-hidden w-[400px] aspect-square z-0"
-    href={`/p6/recipes/${recipe.uuid}`}
+    href={`/recipes/${recipe.uuid}`}
 >
     <Image styles="z-0 absolute object-cover" imagePath={recipe.imagePath} placeholder="baba.jpg" alt={recipe.title}/>
     <div class="z-20 mt-auto bg-white/70 w-full flex flex-col gap-1 items-center p-2 h-[200px]">

@@ -21,7 +21,7 @@
     <div class="text-center">{faker.number.float({min: 1.0, max: 5.0, fractionDigits: 2})}</div>
     <div class="text-center">{faker.number.int({min: 1, max: 100})}</div>
     <div class="flex gap-2">
-        <a href={`/p6/recipes/${recipe.uuid}`} title="go to page"><SquareArrowOutUpRight /></a>
+        <a href={`/recipes/${recipe.uuid}`} title="go to page"><SquareArrowOutUpRight /></a>
         <button title="edit" on:mousedown={onEdit} type="button"><Pencil/></button>
         <button title="delete" type="button" use:melt={$deleteDialogTrigger} on:mousedown={() => onDelete(recipe.uuid)}><Trash/></button>
     </div>

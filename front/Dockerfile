@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 
 # Builds solution
 RUN npm run build
-RUN npm prune --prod
+# RUN npm prune --prod
 
 # FROM node:18.8.0-alpine AS deployer
 

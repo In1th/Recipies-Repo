@@ -10,7 +10,7 @@
         const cat = target.value;
         selectedCategory = cat;
 
-        const newUrl = `/recipes?cat=${encodeURIComponent(cat)}`;
+        const newUrl = `./recipes?cat=${encodeURIComponent(cat)}`;
         await goto(newUrl);
 
         $searchStore.filtered = $searchStore.data.filter(recipe => recipe.category.name.toLowerCase() === cat.toLowerCase());

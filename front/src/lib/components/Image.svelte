@@ -4,7 +4,7 @@
     export let alt: string;
     export let styles = '';
 
-    $: imgUrl = `./blob/image/${imagePath.split('/').pop()}`
+    $: imgUrl = `/p6/blob/image/${imagePath.split('/').pop()}`
 </script>
 
 <img class={styles} src={imgUrl} placeholder={placeholder} alt={alt}/>

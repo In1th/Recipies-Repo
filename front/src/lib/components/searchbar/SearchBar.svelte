@@ -63,7 +63,7 @@
         showTags = false;
     }
 
-   $: searchUrl = `/recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+   $: searchUrl = `./recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
     const search = async () => {
         const selectedTags = $tags.map(t => t.value);
         await goto(searchUrl);

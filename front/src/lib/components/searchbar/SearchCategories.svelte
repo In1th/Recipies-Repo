@@ -19,6 +19,7 @@
 </script>
 
 <section class="flex gap-5 py-3 category-container">
+    <h3>FIX</h3>
     {#each categories as category}
         <button
             on:click={search}

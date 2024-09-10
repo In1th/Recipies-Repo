@@ -6,6 +6,7 @@
     import { searchStore } from '$lib/components/searchbar/search';
     import { goto } from "$app/navigation";
     import type { TagRow } from "$lib/models"
+    import { page } from '$app/stores';
 
     export let data;
     const {
@@ -63,12 +64,23 @@
         showTags = false;
     }
 
-   $: searchUrl = `./recipes${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+   $: searchUrl = `${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
+
     const search = async () => {
         const selectedTags = $tags.map(t => t.value);
-        await goto(searchUrl);
+
+        let newUrl = "";
+        if ($page.url.pathname.includes('recipes/')) {
+            const baseUrl = $page.url.pathname.split('/recipes/')[0];
+            newUrl = `${baseUrl}/recipes${searchUrl}`;
+        } else {
+            newUrl = `./recipes${searchUrl}`;
+        }
+
+        await goto(newUrl);
         $searchStore.filtered = $searchStore.data.filter(recipe => selectedTags.some(tag => recipe.tags.some(t => t.name.toLowerCase() === tag.toLowerCase())))
         showTags = false;
+        $searchStore.search = ''
     }
 </script>
 

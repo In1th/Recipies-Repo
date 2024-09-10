@@ -12,7 +12,6 @@
         selectedCategory = cat;
 
         let newUrl = "";
-
         if ($page.url.pathname.includes('recipes/')) {
             const baseUrl = $page.url.pathname.split('/recipes/')[0];
             newUrl = `${baseUrl}/recipes?cat=${encodeURIComponent(cat)}`;

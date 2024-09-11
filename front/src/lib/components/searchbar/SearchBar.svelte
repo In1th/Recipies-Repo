@@ -7,6 +7,7 @@
     import { goto } from "$app/navigation";
     import type { TagRow } from "$lib/models"
     import { page } from '$app/stores';
+    import { tagsStore } from '$lib/stores/tagsStore';
 
     export let data;
     const {
@@ -60,7 +61,8 @@
     }
 
     const clear = () => {
-        $tags = [];
+        //$tags = [];
+        tags.set([]);
         showTags = false;
     }
 
@@ -87,6 +89,8 @@
         showTags = false;
         // $searchStore.search = '';
     }
+
+    $: tagsStore.set(tags);
 </script>
 
 

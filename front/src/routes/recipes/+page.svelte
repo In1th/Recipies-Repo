@@ -3,6 +3,7 @@
     import { page } from '$app/stores';
     import { searchTermsRecipe, searchStore, searchHandler } from '$lib/components/searchbar/search';
     import { browser } from '$app/environment';
+    import { tagsStore } from '$lib/stores/tagsStore';
 
     export let data;
 
@@ -62,6 +63,7 @@
 
     $: if ( $page.url.searchParams.get('cat')) {
         const category = $page.url.searchParams.get('cat');
+        $tagsStore.set([]);
         console.log("/recipes+page.svelte inside IF category: " + category);
 
         $searchStore.filtered = $searchStore.data.filter(recipe => {

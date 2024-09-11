@@ -1,4 +1,8 @@
 import {faker} from '@faker-js/faker';
+import { getAvailableImages } from './getAvailabelImages';
+
+const availableImages = getAvailableImages();
+//const randomImage = faker.helpers.arrayElement(availableImages);
 
 const createBody = () => ({
     title: faker.word.words(3),
@@ -12,7 +16,8 @@ const createBody = () => ({
     })),
     rate: 1,
     mdFilePath: '/var/resources/recipes/lemon_bars.md',
-    imagePath: '/var/resources/images/lemon_bars.jpg',
+    //imagePath: '/var/resources/images/lemon_bars.jpg',
+    imagePath: `/var/resources/images/${faker.helpers.arrayElement(availableImages)}`,
     calories: faker.number.int({min: 100, max: 1000})
 });
 

@@ -67,20 +67,25 @@
    $: searchUrl = `${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
 
     const search = async () => {
+        console.log("searchBar tags: search");
         const selectedTags = $tags.map(t => t.value);
+        console.log("searchBar tags: selectedTags: " + selectedTags);
 
         let newUrl = "";
         if ($page.url.pathname.includes('recipes/')) {
             const baseUrl = $page.url.pathname.split('/recipes/')[0];
             newUrl = `${baseUrl}/recipes${searchUrl}`;
+            console.log("searchBar tags: IF newUrl: " + newUrl);
         } else {
             newUrl = `./recipes${searchUrl}`;
+            console.log("searchBar tags: ELSE newUrl: " + newUrl);
         }
 
         await goto(newUrl);
         $searchStore.filtered = $searchStore.data.filter(recipe => selectedTags.some(tag => recipe.tags.some(t => t.name.toLowerCase() === tag.toLowerCase())))
+        console.log("searchBar tags: $searchStore.filtered: ", $searchStore.filtered);
         showTags = false;
-        $searchStore.search = ''
+        $searchStore.search = '';
     }
 </script>
 

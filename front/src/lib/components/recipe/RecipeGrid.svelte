@@ -6,14 +6,38 @@
 
     export let recipes: Recipe[];
 
-    const props = createPagination({
-      count: recipes.length,
-      perPage: 3*5,
-      defaultPage: 1,
-      siblingCount: 1,
-    });
+    // let props;
+    // let range;
+    // let props = createPagination({
+    //   count: recipes.length,
+    //   perPage: 3*5,
+    //   defaultPage: 1,
+    //   siblingCount: 1,
+    // });
 
-    const {states: {range}} = props;
+    // let {states: {range}} = props;
+
+    let props;
+    let range;
+
+    // Reaktywnie ustawiaj paginację dopiero po załadowaniu przepisów
+    $: if (recipes.length > 0) {
+        props = createPagination({
+            count: recipes.length,
+            perPage: Math.min(15, recipes.length), // Wyświetl do 15 elementów lub mniej, jeśli mniej przepisów
+            defaultPage: 1,
+            siblingCount: 1,
+        });
+
+        // Pobierz zakres po zaktualizowaniu props
+        range = props.states.range;
+    }
+
+    // Debugowanie zakresu
+    $: if (range) {
+        console.log("Aktualny zakres: start:", range.start, "end:", range.end);
+        console.log("Liczba przepisów:", recipes.length);
+    }
 </script>
 
 <Pagination props={props} />

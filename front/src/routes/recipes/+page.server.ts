@@ -5,11 +5,6 @@ import type { TagRow, TagCount, Recipe } from "$lib/models/RecipeDto";
 export const load: PageServerLoad  = async ({ fetch, url }) => {
         const res = await fetch('http://backend:8080/api/v0/recipes');
 
-        console.log("/recipe : load - after fetch");
-        const category = url.searchParams.get('cat');
-
-        console.log("/recipe : category from url: " + category);
-
         if (!res.ok) {
             return fail(
                 res.status,

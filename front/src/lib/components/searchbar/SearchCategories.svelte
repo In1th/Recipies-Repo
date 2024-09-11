@@ -19,8 +19,11 @@
             newUrl = `./recipes?cat=${encodeURIComponent(cat)}`;
         }
 
+        // $searchStore.filtered = $searchStore.data.filter(recipe => recipe.category.name.toLowerCase() === cat.toLowerCase());
+        // console.log("SearchCaategory after goto, check $searchStore.filtered: ", $searchStore.filtered);
         await goto(newUrl);
-        $searchStore.filtered = $searchStore.data.filter(recipe => recipe.category.name.toLowerCase() === cat.toLowerCase());
+        //console.log("SearchCaategory after goto, check $searchStore.data: ", $searchStore.data);
+
     };
 
 </script>

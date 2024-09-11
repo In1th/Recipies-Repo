@@ -82,10 +82,10 @@
         }
 
         await goto(newUrl);
-        $searchStore.filtered = $searchStore.data.filter(recipe => selectedTags.some(tag => recipe.tags.some(t => t.name.toLowerCase() === tag.toLowerCase())))
-        console.log("searchBar tags: $searchStore.filtered: ", $searchStore.filtered);
+        // $searchStore.filtered = $searchStore.data.filter(recipe => selectedTags.some(tag => recipe.tags.some(t => t.name.toLowerCase() === tag.toLowerCase())))
+        // console.log("searchBar tags: $searchStore.filtered: ", $searchStore.filtered);
         showTags = false;
-        $searchStore.search = '';
+        // $searchStore.search = '';
     }
 </script>
 

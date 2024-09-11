@@ -19,10 +19,16 @@
     const close = () => {
         $open = false;
     }
+
+    const handleSubmit = async (event: Event) => {
+        event.preventDefault();
+        close();
+    }
+
 </script>
 
 {#if $open}
-  <form method="POST" use:enhance use:melt={$portalled}>
+  <form method="post" action="?/delete" on:submit={handleSubmit} use:enhance use:melt={$portalled}>
     <input bind:value={recipeId} class="hidden" name="uuid"/>
     <div
         use:melt={$overlay}
@@ -36,7 +42,7 @@
       <p use:melt={$description}>Do you want to delete recipe with id: "{recipeId}"?</p>
       <div class="flex gap-2">
           <button type="button" on:mousedown={close} class="ml-auto bg-secondary-500">No</button>
-          <button formaction="?/delete" on:mousedown={close} class="bg-primary-500">Yes</button>
+          <button type="submit" formaction="?/delete" class="bg-primary-500">Yes</button>
       </div>
     </div>
   </form>

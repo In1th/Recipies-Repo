@@ -10,7 +10,7 @@ export const actions: Actions = {
         try {
             const data = Object.fromEntries(await event.request.formData()) as NewRecipeFormData;
             const { file, image, title } = data;
-    
+
             await fs.promises.writeFile(
                 `/var/resources/recipes/${title.toLowerCase().replaceAll(' ', '_')}.md`,
                 await file.text(), {
@@ -18,7 +18,7 @@ export const actions: Actions = {
                     flag: "w",
                 }
             );
-    
+
             const extension = image.name.split('.').pop()!;
             await fs.promises.writeFile(
                 `/var/resources/images/${title.toLowerCase().replaceAll(' ', '_')}.${extension}`,
@@ -27,7 +27,7 @@ export const actions: Actions = {
                     flag: "w",
                 }
             );
-    
+
             await BackendClient.newRecipe(event, fromNewRecipeData({...data, imageExtension: extension}));
         } catch (error) {
             console.log(error);

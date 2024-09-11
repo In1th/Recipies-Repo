@@ -35,7 +35,7 @@
     };
 
     $: if (form?.success) {
-        addSuccessToast('Added new recipe', successMsg[form.type]);
+        addSuccessToast('Success!', successMsg[form.type]);
         $editRecipeStore = undefined;
         form = null;
     } else if (form?.success === false) {

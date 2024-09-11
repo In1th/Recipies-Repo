@@ -22,6 +22,5 @@
 
 </script>
 <section class="flex flex-col justify-center items-center">
-    <div>root page</div>
     <RecipeGrid recipes={$searchStore.filtered}/>
 </section>

@@ -16,7 +16,6 @@ const createBody = () => ({
     })),
     rate: 1,
     mdFilePath: '/var/resources/recipes/lemon_bars.md',
-    //imagePath: '/var/resources/images/lemon_bars.jpg',
     imagePath: `/var/resources/images/${faker.helpers.arrayElement(availableImages)}`,
     calories: faker.number.int({min: 100, max: 1000})
 });

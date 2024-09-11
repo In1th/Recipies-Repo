@@ -3,7 +3,6 @@
     import { Clock, Flame, Star } from "lucide-svelte";
     import Image from "../Image.svelte";
     import TagsView from "../TagsView.svelte";
-    import { faker } from "@faker-js/faker";
     import FakeRate from "../FakeRate.svelte";
 
     export let recipe: Recipe;

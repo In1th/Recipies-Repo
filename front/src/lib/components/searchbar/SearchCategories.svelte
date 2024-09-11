@@ -1,6 +1,5 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { searchStore } from '$lib/components/searchbar/search';
     import { page } from '$app/stores';
 
     export let categories: string[];
@@ -18,14 +17,8 @@
         } else {
             newUrl = `./recipes?cat=${encodeURIComponent(cat)}`;
         }
-
-        // $searchStore.filtered = $searchStore.data.filter(recipe => recipe.category.name.toLowerCase() === cat.toLowerCase());
-        // console.log("SearchCaategory after goto, check $searchStore.filtered: ", $searchStore.filtered);
         await goto(newUrl);
-        //console.log("SearchCaategory after goto, check $searchStore.data: ", $searchStore.data);
-
     };
-
 </script>
 
 <section class="flex gap-5 py-3 category-container">

@@ -2,6 +2,7 @@
     import RecipeGrid  from "$lib/components/recipe/RecipeGrid.svelte";
     import { searchHandler, searchTermsRecipe, searchStore } from '$lib/components/searchbar/search';
     import { onDestroy } from 'svelte';
+    import { tagsStore } from '$lib/stores/tagsStore';
 
     export let data;
     const searchRecipes = searchTermsRecipe(data.recipes);
@@ -16,6 +17,8 @@
     onDestroy(() => {
         unsubscribe();
     });
+
+    $tagsStore.set([]);
 
 </script>
 <section class="flex flex-col justify-center items-center">

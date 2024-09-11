@@ -6,14 +6,19 @@
 
     export let recipes: Recipe[];
 
-    const props = createPagination({
-      count: recipes.length,
-      perPage: 3*5,
-      defaultPage: 1,
-      siblingCount: 1,
-    });
+    let props;
+    let range;
 
-    const {states: {range}} = props;
+    $: if (recipes.length > 0) {
+        props = createPagination({
+            count: recipes.length,
+            perPage: Math.min(15, recipes.length),
+            defaultPage: 1,
+            siblingCount: 1,
+        });
+
+        range = props.states.range;
+    }
 </script>
 
 <Pagination props={props} />

@@ -3,7 +3,6 @@
     import { Clock, Flame, Star } from "lucide-svelte";
     import Image from "../Image.svelte";
     import TagsView from "../TagsView.svelte";
-    import { faker } from "@faker-js/faker";
     import FakeRate from "../FakeRate.svelte";
 
     export let recipe: Recipe;
@@ -13,7 +12,7 @@
     class="relative flex flex-col gap-2 items-center shadow-lg rounded-2xl bg-primary-500 overflow-hidden w-[400px] aspect-square z-0"
     href={`/p6/recipes/${recipe.uuid}`}
 >
-    <Image styles="z-0 absolute object-cover" imagePath={recipe.imagePath} placeholder="baba.jpg" alt={recipe.title}/>
+    <Image styles="z-0 absolute w-full h-full object-cover" imagePath={recipe.imagePath} placeholder="baba.jpg" alt={recipe.title}/>
     <div class="z-20 mt-auto bg-white/70 w-full flex flex-col gap-1 items-center p-2 h-[200px]">
         <h2>{recipe.title}</h2>
         <div class="flex gap-2">

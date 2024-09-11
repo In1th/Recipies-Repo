@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { searchStore } from '$lib/components/searchbar/search';
+    import { page } from '$app/stores';
 
     export let categories: string[];
     let selectedCategory = '';
@@ -10,12 +10,15 @@
         const cat = target.value;
         selectedCategory = cat;
 
-        const newUrl = `./recipes?cat=${encodeURIComponent(cat)}`;
+        let newUrl = "";
+        if ($page.url.pathname.includes('recipes/')) {
+            const baseUrl = $page.url.pathname.split('/recipes/')[0];
+            newUrl = `${baseUrl}/recipes?cat=${encodeURIComponent(cat)}`;
+        } else {
+            newUrl = `./recipes?cat=${encodeURIComponent(cat)}`;
+        }
         await goto(newUrl);
-
-        $searchStore.filtered = $searchStore.data.filter(recipe => recipe.category.name.toLowerCase() === cat.toLowerCase());
     };
-
 </script>
 
 <section class="flex gap-5 py-3 category-container">

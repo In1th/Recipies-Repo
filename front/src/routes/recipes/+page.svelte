@@ -1,9 +1,8 @@
 <script>
     import RecipeGrid  from "$lib/components/recipe/RecipeGrid.svelte";
     import { page } from '$app/stores';
-    import { searchTermsRecipe, searchStore, searchHandler } from '$lib/components/searchbar/search';
+    import { searchTermsRecipe, searchStore } from '$lib/components/searchbar/search';
     import { browser } from '$app/environment';
-    import { tagsStore } from '$lib/stores/tagsStore';
 
     export let data;
 
@@ -37,7 +36,6 @@
 
     $: if ( $page.url.searchParams.get('cat')) {
         const category = $page.url.searchParams.get('cat');
-        $tagsStore.set([]);
 
         $searchStore.filtered = $searchStore.data.filter(recipe => {
             return recipe.category?.name?.toLowerCase() === category.toLowerCase();
@@ -53,7 +51,6 @@
 
         $searchStore.search = '';
     }
-
 </script>
 
 <section class="flex flex-col justify-center items-center">

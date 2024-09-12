@@ -7,7 +7,7 @@
     import { enhance } from "$app/forms";
 
     export let categories: {name: string}[];
-    
+
     const {
     elements: { trigger, menu, option, label },
     states: { selectedLabel, open, selected },
@@ -36,7 +36,7 @@
 
 <h1 class="pb-4">{$editRecipeStore? "Edit recipe" : 'New recipe'}</h1>
 {#if $editRecipeStore}
-    <p>Id: {$editRecipeStore.uuid}</p>
+    <!-- <p>Id: {$editRecipeStore.uuid}</p> -->
 {/if}
 <form class="flex flex-col gap-2 w-[450px]" method="post" action={action} use:enhance enctype="multipart/form-data">
     <fieldset>
@@ -100,17 +100,17 @@
         <input accept=".md" name="file" type="file" disabled={!!$editRecipeStore}/>
     </fieldset>
     <section class="hidden">
-        <input  
+        <input
             name="uuid"
             type="text"
             value={$editRecipeStore?.uuid ?? ''}
         />
-        <input  
+        <input
             name="mdFilePath"
             type="text"
             value={$editRecipeStore?.mdFilePath ?? ''}
         />
-        <input  
+        <input
             name="imagePath"
             type="text"
             value={$editRecipeStore?.imagePath ?? ''}

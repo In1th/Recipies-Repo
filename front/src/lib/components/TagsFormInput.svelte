@@ -1,32 +1,36 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
-    import { editRecipeStore } from '$lib/stores';
-    import { createTagsInput, melt, type Tag } from '@melt-ui/svelte';
-    import { X } from 'lucide-svelte';
-  
-    export let name: string;
+  import { goto } from '$app/navigation';
+  import { editRecipeStore } from '$lib/stores';
+  import { createTagsInput, melt, type Tag } from '@melt-ui/svelte';
+  import { X } from 'lucide-svelte';
 
-    const {
-      elements: { root, input, tag, deleteTrigger, edit },
-      states: { tags },
-    } = createTagsInput({
-      unique: true,
-      add(tag) {
-        return { id: tag, value: tag };
-      },
-      addOnPaste: true,
-    });
+  export let name: string;
 
-    $: propName = name.toLowerCase();
-    $: formData = $tags.map(t => `${t.value}`).join('|')
+  const {
+    elements: { root, input, tag, deleteTrigger, edit },
+    states: { tags },
+  } = createTagsInput({
+    unique: true,
+    add(tag) {
+      return { id: tag, value: tag };
+    },
+    addOnPaste: true,
+  });
 
-    $: if ($editRecipeStore){
-      $tags = $editRecipeStore.tags.map(t => ({id: t.name, value: t.name} as Tag))
-    } else {
-      $tags = [];
-    }
-  </script>
-  
+  $: propName = name.toLowerCase();
+  $: formData = $tags.map(t => `${t.value}`).join('|')
+
+  $: if ($editRecipeStore){
+    $tags = $editRecipeStore.tags.map(t => ({id: t.name, value: t.name} as Tag))
+  } else {
+    $tags = [];
+  }
+
+  function preventSubmit(event: Event) {
+    event.preventDefault();
+  }
+</script>
+
 <div class="relative flex-grow flex flex-col items-start justify-center gap-2 z-0">
   <label for={propName}>{name}</label>
   <input name={propName} bind:value={formData} class="hidden"/>
@@ -45,6 +49,7 @@
         <button
           use:melt={$deleteTrigger(t)}
           class="flex h-full items-center px-1"
+          on:click={preventSubmit}
         >
           <X class="size-3" />
         </button>
@@ -54,7 +59,7 @@
         class="flex items-center overflow-hidden rounded-md px-1.5 focus:outline-none [word-break:break-word] data-[invalid-edit]:focus:!ring-red-500"
       />
     {/each}
-    
+
     <input
       use:melt={$input}
       type="text"

@@ -4,10 +4,12 @@
     import { clickOutside } from "./clickOutside";
     import { fly } from "svelte/transition";
     import { searchStore } from '$lib/components/searchbar/search';
-    import { goto } from "$app/navigation";
+    import { goto, beforeNavigate } from "$app/navigation";
     import type { TagRow } from "$lib/models"
     import { page } from '$app/stores';
     import { tagsStore } from '$lib/stores/tagsStore';
+    import { onMount } from 'svelte';
+    import type { Tag } from '$lib/models/RecipeDto';
 
     export let data;
     const {
@@ -68,8 +70,6 @@
    $: searchUrl = `${$tags.length ? '?tags=' + $tags.map(t => t.value).join(',') : ''}`;
 
     const search = async () => {
-        const selectedTags = $tags.map(t => t.value);
-
         let newUrl = "";
         if ($page.url.pathname.includes('recipes/')) {
             const baseUrl = $page.url.pathname.split('/recipes/')[0];
@@ -82,9 +82,14 @@
         showTags = false;
     }
 
-    $: tagsStore.set(tags);
-</script>
+    beforeNavigate(() => {
+        if ($page.url.searchParams.get('tags')) {
+            tagsStore.set([]);
+            clear();
+        }
+    });
 
+</script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -120,24 +125,23 @@
             <Search />
         </button>
     </div>
-
     <div class="flex flex-row w-full min-h-16 flex-wrap gap-2.5 rounded-md md:px-3 py-2">
         {#each $tags as t}
             <div
                 use:melt={$tag(t)}
-                class:green={!t.value.startsWith('-') && !t.value.includes(":")}
-                class:red={t.value.startsWith('-')}
-                class:blue={t.value.includes(":")}
+                class:green={!t.value?.startsWith('-') && !t.value?.includes(":")}
+                class:red={t.value?.startsWith('-')}
+                class:blue={t.value?.includes(":")}
                 class="flex items-center overflow-hidden rounded-xl bg-red h-fit"
             >
-                {#if ["orderby", "type"].includes(t.value.split(":")[0])}
+                {#if t.value && ["orderby", "type"].includes(t.value?.split(":")[0])}
                     <span
                         class="flex items-center border-r border-white/10 px-1.5"
-                        >{t.value.split(":")[0]}</span
+                        >{t.value?.split(":")[0]}</span
                     >
                 {/if}
                 <span class="flex items-center border-r border-white/10 px-1.5">
-                    {!t.value.includes(':') ? t.value.replace('-', '') : t.value.split(':')[1]}
+                    {!t.value?.includes(':') ? t.value?.replace('-', '') : t.value?.split(':')[1]}
                 </span>
                 <button
                     use:melt={$deleteTrigger(t)}

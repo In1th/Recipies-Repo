@@ -2,7 +2,7 @@ import type { PageServerLoad  } from "./$types";
 import { fail } from '@sveltejs/kit';
 import type { TagRow, TagCount, Recipe } from "$lib/models/RecipeDto";
 
-export const load: PageServerLoad  = async ({ fetch, url }) => {
+export const load: PageServerLoad  = async ({ fetch }) => {
         const res = await fetch('http://backend:8080/api/v0/recipes');
 
         if (!res.ok) {

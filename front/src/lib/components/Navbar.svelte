@@ -12,7 +12,7 @@
         elements: { menubar },
         builders: { createMenu },
     } = createMenubar();
-    
+
     const {
         elements: {
           trigger: triggerBurger,

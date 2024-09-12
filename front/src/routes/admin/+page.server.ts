@@ -20,9 +20,11 @@ export const actions: Actions = {
             );
 
             const extension = image.name.split('.').pop()!;
+            const imageBuffer = Buffer.from(await image.arrayBuffer());
             await fs.promises.writeFile(
                 `/var/resources/images/${title.toLowerCase().replaceAll(' ', '_')}.${extension}`,
-                await image.text(), {
+                imageBuffer,
+                {
                     encoding: "binary",
                     flag: "w",
                 }
